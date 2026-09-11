@@ -80,6 +80,45 @@
   ],
   "latam": [
     {
+      "name": "Clínica Imbanaco · Quirónsalud",
+      "country": "Colombia",
+      "model": "Triage digital estructurado",
+      "provider": "Treelogic / SET",
+      "scale": "SET",
+      "aiRole": "Software estructurado de clasificación y priorización",
+      "humanRole": "Profesional de triage",
+      "evidence": "Implementación confirmada en Urgencias · 2026",
+      "priority": "Alta",
+      "priorityClass": "ok",
+      "productive": true
+    },
+    {
+      "name": "Subred Integrada Sur · Doc-Tok",
+      "country": "Colombia",
+      "model": "IA para recomendación de triage",
+      "provider": "Doc-Tok",
+      "scale": "5 categorías Colombia",
+      "aiRole": "Clasifica según síntomas + alertas de criticidad",
+      "humanRole": "Validación profesional",
+      "evidence": "Piloto / preincubación",
+      "priority": "Alta",
+      "priorityClass": "ok",
+      "productive": false
+    },
+    {
+      "name": "Subred Sur Occidente · Oportuna",
+      "country": "Colombia",
+      "model": "IA para monitoreo post-triage",
+      "provider": "Oportuna",
+      "scale": "Oportunidad por categoría",
+      "aiRole": "Alertas de espera y oportunidad",
+      "humanRole": "Equipo clínico",
+      "evidence": ">640.000 alertas; Triage 2: 29→18 min (institución)",
+      "priority": "Media-Alta",
+      "priorityClass": "part",
+      "productive": true
+    },
+    {
       "name": "Hospital Santa Rita",
       "country": "Brasil",
       "model": "IA asistiendo triage",
