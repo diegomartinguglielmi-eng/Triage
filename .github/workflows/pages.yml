@@ -24,7 +24,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Actualizar benchmark Hospital Austral
+      - name: Actualizar benchmark Hospital Austral y ordenar Argentina
         run: |
           python3 - <<'PY'
           from pathlib import Path
@@ -49,6 +49,20 @@ jobs:
                       'referenceType': 'Caso productivo / referencia JCI'
                   })
                   break
+
+          # Orden ejecutivo: primero instituciones JCI (3 Buenos Aires + Córdoba), luego resto de casos.
+          preferred = [
+              'Hospital Italiano',
+              'Hospital Alemán',
+              'Hospital Austral',
+              'Hospital Privado Universitario de Córdoba',
+              'Sanatorio Finochietto',
+              'Galeno · TTS (Trinidad Triage System)',
+              'SAP-RN · ALTEC + Google'
+          ]
+          rank = {name: i for i, name in enumerate(preferred)}
+          d['argentina'] = sorted(d.get('argentina', []), key=lambda x: rank.get(x.get('name'), len(rank)))
+
           p.write_text(json.dumps(d, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
           PY
 
