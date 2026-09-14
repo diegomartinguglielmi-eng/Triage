@@ -24,7 +24,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Actualizar benchmark Hospital Austral y ordenar Argentina
+      - name: Curar benchmarks Argentina y LATAM
         run: |
           python3 - <<'PY'
           from pathlib import Path
@@ -32,6 +32,7 @@ jobs:
 
           p = Path('data.json')
           d = json.loads(p.read_text(encoding='utf-8'))
+
           for x in d.get('argentina', []):
               if x.get('name') == 'Hospital Austral':
                   x.update({
@@ -39,29 +40,42 @@ jobs:
                       'responsible': 'Enfermería en presencial · profesional en triage virtual',
                       'scale': '5 niveles institucionales',
                       'technology': 'VITA HCE + triage digital + Portal del Paciente + Guardia Virtual integrada',
-                      'status': 'Productivo · validado',
-                      'statusClass': 'ok',
-                      'key': '~650 pacientes/día en Emergencias; ~20% requiere mayor complejidad/observación. Todo paciente adulto o pediátrico pasa por triage. Niveles 1–3 se resuelven por Emergencias 24/7; niveles 4–5 pueden derivarse a Demanda Espontánea. El triage virtual puede asignar horario programado para atención presencial de baja complejidad. Picos reportados alrededor de 11:00 y 19:00; lunes y martes ~30% más demanda.',
-                      'next': 'Confirmar dotación simultánea de Enfermería en triage, tiempo promedio de clasificación, SLA por nivel, reglas de re-triage, tasa de concordancia y si VITA incorpora automatización o IA en la recomendación.',
+                      'status': 'Productivo · validado', 'statusClass': 'ok',
+                      'key': '~650 pacientes/día en Emergencias; ~20% requiere mayor complejidad/observación. Todo paciente adulto o pediátrico pasa por triage. Niveles 1–3 se resuelven por Emergencias 24/7; niveles 4–5 pueden derivarse a Demanda Espontánea. El triage virtual puede asignar horario programado para atención presencial de baja complejidad.',
+                      'next': 'Confirmar dotación simultánea de Enfermería, tiempo promedio, SLA por nivel, re-triage y eventual IA.',
                       'source': 'Hospital Austral · Emergencias + Sistema de Triage + Guardia Programada + VITA + información institucional JCI',
-                      'confirmed': True,
-                      'ai': False,
-                      'referenceType': 'Caso productivo / referencia JCI'
+                      'confirmed': True, 'ai': False, 'referenceType': 'Caso productivo / referencia JCI'
                   })
                   break
 
-          # Orden ejecutivo: primero instituciones JCI (3 Buenos Aires + Córdoba), luego resto de casos.
-          preferred = [
-              'Hospital Italiano',
-              'Hospital Alemán',
-              'Hospital Austral',
-              'Hospital Privado Universitario de Córdoba',
-              'Sanatorio Finochietto',
-              'Galeno · TTS (Trinidad Triage System)',
-              'SAP-RN · ALTEC + Google'
-          ]
-          rank = {name: i for i, name in enumerate(preferred)}
+          preferred = ['Hospital Italiano','Hospital Alemán','Hospital Austral','Hospital Privado Universitario de Córdoba','Sanatorio Finochietto','Galeno · TTS (Trinidad Triage System)','SAP-RN · ALTEC + Google']
+          rank = {name:i for i,name in enumerate(preferred)}
           d['argentina'] = sorted(d.get('argentina', []), key=lambda x: rank.get(x.get('name'), len(rank)))
+
+          # LATAM: 4 referencias JCI + 3 casos de mayor valor específico para el modelo Otamendi.
+          d['latam'] = [
+            {
+              'name':'Fundación Santa Fe de Bogotá','country':'Colombia','model':'Triage presencial estructurado de alta complejidad','provider':'Institucional','scale':'ESI / clasificación por prioridad','aiRole':'Sin evidencia de IA asignando triage; IA aplicada a circuitos tiempo-dependientes','humanRole':'Enfermería / equipo de Urgencias','evidence':'JCI reacreditada 2025 · ~84.000 casos/año (2022) · 98 camas de Urgencias','priority':'Muy alta','priorityClass':'ok','productive':True,'jci':True
+            },
+            {
+              'name':'Fundación Valle del Lili','country':'Colombia','model':'Triage presencial estructurado + soporte digital','provider':'Institucional','scale':'5 niveles','aiRole':'Sin evidencia pública de IA clasificatoria en triage','humanRole':'Médicos + Enfermería','evidence':'JCI 2026 · software integrado a HCE · referencia histórica ~72.693 urgencias/año','priority':'Muy alta','priorityClass':'ok','productive':True,'jci':True
+            },
+            {
+              'name':'Einstein Hospital Israelita','country':'Brasil','model':'Triage estructurado + ecosistema avanzado de soporte clínico','provider':'Institucional','scale':'ESI','aiRole':'IA diagnóstica/predictiva alrededor de Urgencias; no confirmada para prioridad inicial','humanRole':'Enfermería','evidence':'JCI · 9º ciclo evaluado en 2024 · referencia de Urgencias con ESI','priority':'Muy alta','priorityClass':'ok','productive':True,'jci':True
+            },
+            {
+              'name':'Hospital Sírio-Libanês','country':'Brasil','model':'Urgencias de alta complejidad · triage a profundizar','provider':'Institucional','scale':'A confirmar','aiRole':'Ecosistema digital avanzado; rol específico de IA en triage a confirmar','humanRole':'A confirmar','evidence':'JCI hospitalaria desde 2007 · reacreditaciones cada 3 años','priority':'Alta','priorityClass':'ok','productive':True,'jci':True
+            },
+            {
+              'name':'EsSalud · Red Asistencial La Libertad','country':'Perú','model':'Triaje digital con IA','provider':'EsSalud / desarrollo institucional','scale':'5 niveles','aiRole':'Analiza datos y sugiere prioridad','humanRole':'Médico realiza/valida el triaje','evidence':'Implementado en 4 hospitales desde 2025 · caso productivo','priority':'Muy alta','priorityClass':'ok','productive':True,'jci':False
+            },
+            {
+              'name':'UPA Campos Salles','country':'Brasil','model':'IA analítica + clasificación de riesgo','provider':'CloudSaúde / Sinamnese','scale':'Manchester / flujo propio','aiRole':'Recomienda y alerta','humanRole':'Enfermería decide','evidence':'8.000+ pacientes/mes · integración signos vitales · HL7/FHIR (proveedor)','priority':'Muy alta','priorityClass':'ok','productive':True,'jci':False
+            },
+            {
+              'name':'Subred Sur Occidente · Oportuna','country':'Colombia','model':'IA para monitoreo post-triage','provider':'Oportuna','scale':'Oportunidad por categoría','aiRole':'Alertas de espera y oportunidad','humanRole':'Equipo clínico','evidence':'>640.000 alertas · Triage 2: 29→18 min (institución)','priority':'Alta','priorityClass':'ok','productive':True,'jci':False
+            }
+          ]
 
           p.write_text(json.dumps(d, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
           PY
@@ -71,71 +85,18 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           import re
-
-          p = Path('index.html')
-          s = p.read_text(encoding='utf-8')
-
-          logo = '''<div class="brand-lockup" aria-label="Sanatorio Otamendi">
-          <img class="otamendi-seal-img" src="logo_som_gris.png?v=20260914-1" alt="Sanatorio Otamendi">
-          </div>'''
-
-          s = re.sub(r'<div class="brand-lockup"[^>]*>.*?</div>', logo, s, count=1, flags=re.S)
-
-          responsive = '''
-          /* Ajuste estructural 14-09: logo Otamendi gris definitivo + tablero sin cortes */
-          .brand-lockup{height:205px!important;margin:6px 0 10px!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:visible!important}
-          .otamendi-seal-img{display:block!important;width:150px!important;height:auto!important;max-width:90%!important;object-fit:contain!important;filter:none!important;opacity:1!important}
-          .app{grid-template-columns:220px minmax(0,1fr)!important;width:100%;max-width:100vw;overflow-x:hidden}
-          main{min-width:0!important;width:100%!important;overflow-x:hidden!important}
-          .cards{grid-template-columns:repeat(5,minmax(0,1fr))!important}
-          .card{min-width:0!important}.card .value{overflow-wrap:anywhere}
-          .grid2{grid-template-columns:minmax(0,1.5fr) minmax(250px,.72fr)!important;min-width:0}
-          .panel,.status-box{min-width:0}.status-box p,.panel p{overflow-wrap:anywhere}
-
-          /* Sello compacto JCI debajo del nombre, sin alterar anchos de tabla */
-          .jci-accred{display:flex;align-items:center;gap:5px;margin-top:5px;width:max-content;max-width:100%;font-size:7.4px;font-weight:800;color:#6e4d00;line-height:1;white-space:nowrap}
-          .jci-seal{width:21px;height:21px;min-width:21px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:radial-gradient(circle at 35% 30%,#fff2a8 0,#e9bd43 42%,#b77a00 100%);border:1px solid #b98511;box-shadow:inset 0 0 0 2px rgba(255,255,255,.35);color:#724a00;font-size:7px;font-weight:900;letter-spacing:-.2px}
-          .jci-seal:before{content:'JCI'}
-
-          @media(max-width:1250px){.cards{grid-template-columns:repeat(3,minmax(0,1fr))!important}.grid2{grid-template-columns:1fr!important}}
-          @media(max-width:900px){.app{grid-template-columns:190px minmax(0,1fr)!important}.cards{grid-template-columns:repeat(2,minmax(0,1fr))!important}.brand-lockup{height:175px!important}.otamendi-seal-img{width:128px!important}}
-          @media(max-width:700px){.app{grid-template-columns:1fr!important;overflow:visible}.cards{grid-template-columns:1fr!important}.brand-lockup{height:165px!important}.otamendi-seal-img{width:122px!important}}
+          p=Path('index.html'); s=p.read_text(encoding='utf-8')
+          logo='''<div class="brand-lockup" aria-label="Sanatorio Otamendi"><img class="otamendi-seal-img" src="logo_som_gris.png?v=20260914-1" alt="Sanatorio Otamendi"></div>'''
+          s=re.sub(r'<div class="brand-lockup"[^>]*>.*?</div>',logo,s,count=1,flags=re.S)
+          css='''
+          .brand-lockup{height:205px!important;margin:6px 0 10px!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:visible!important}.otamendi-seal-img{display:block!important;width:150px!important;height:auto!important;max-width:90%!important;object-fit:contain!important;filter:none!important;opacity:1!important}.app{grid-template-columns:220px minmax(0,1fr)!important;width:100%;max-width:100vw;overflow-x:hidden}main{min-width:0!important;width:100%!important;overflow-x:hidden!important}.cards{grid-template-columns:repeat(5,minmax(0,1fr))!important}.card{min-width:0!important}.card .value{overflow-wrap:anywhere}.grid2{grid-template-columns:minmax(0,1.5fr) minmax(250px,.72fr)!important;min-width:0}.panel,.status-box{min-width:0}.status-box p,.panel p{overflow-wrap:anywhere}
+          .jci-accred{display:flex;align-items:center;gap:5px;margin-top:5px;width:max-content;max-width:100%;font-size:7.4px;font-weight:800;color:#6e4d00;line-height:1;white-space:nowrap}.jci-seal{width:21px;height:21px;min-width:21px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:radial-gradient(circle at 35% 30%,#fff2a8 0,#e9bd43 42%,#b77a00 100%);border:1px solid #b98511;box-shadow:inset 0 0 0 2px rgba(255,255,255,.35);color:#724a00;font-size:7px;font-weight:900;letter-spacing:-.2px}.jci-seal:before{content:'JCI'}
+          @media(max-width:1250px){.cards{grid-template-columns:repeat(3,minmax(0,1fr))!important}.grid2{grid-template-columns:1fr!important}}@media(max-width:900px){.app{grid-template-columns:190px minmax(0,1fr)!important}.cards{grid-template-columns:repeat(2,minmax(0,1fr))!important}.brand-lockup{height:175px!important}.otamendi-seal-img{width:128px!important}}@media(max-width:700px){.app{grid-template-columns:1fr!important;overflow:visible}.cards{grid-template-columns:1fr!important}.brand-lockup{height:165px!important}.otamendi-seal-img{width:122px!important}}
           '''
-          s = s.replace('</style>', responsive + '\n</style>', 1)
-
-          jci_script = '''
-          <script>
-          (function(){
-            const jciNames = new Set([
-              'Hospital Italiano',
-              'Hospital Alemán',
-              'Hospital Austral',
-              'Hospital Privado Universitario de Córdoba'
-            ]);
-            function addJciBadges(){
-              document.querySelectorAll('tbody tr').forEach(row=>{
-                const first = row.querySelector('td:first-child');
-                if(!first || first.querySelector('.jci-accred')) return;
-                const raw = first.textContent.replace(/\s+/g,' ').trim();
-                const match = [...jciNames].find(name => raw.includes(name));
-                if(!match) return;
-                const badge = document.createElement('div');
-                badge.className = 'jci-accred';
-                badge.setAttribute('title','Institución acreditada por Joint Commission International');
-                badge.setAttribute('aria-label','Acreditado por Joint Commission International');
-                badge.innerHTML = '<span class="jci-seal" aria-hidden="true"></span><span>Acreditado JCI</span>';
-                first.appendChild(badge);
-              });
-            }
-            addJciBadges();
-            const obs = new MutationObserver(addJciBadges);
-            obs.observe(document.body,{childList:true,subtree:true});
-            window.addEventListener('load',addJciBadges,{once:true});
-          })();
-          </script>
-          '''
-          s = s.replace('</body>', jci_script + '\n</body>', 1)
-          p.write_text(s, encoding='utf-8')
+          s=s.replace('</style>',css+'\n</style>',1)
+          script='''<script>(function(){const jciNames=new Set(['Hospital Italiano','Hospital Alemán','Hospital Austral','Hospital Privado Universitario de Córdoba','Fundación Santa Fe de Bogotá','Fundación Valle del Lili','Einstein Hospital Israelita','Hospital Sírio-Libanês']);function addJciBadges(){document.querySelectorAll('tbody tr').forEach(row=>{const first=row.querySelector('td:first-child');if(!first||first.querySelector('.jci-accred'))return;const raw=first.textContent.replace(/\\s+/g,' ').trim();const match=[...jciNames].find(name=>raw.includes(name));if(!match)return;const badge=document.createElement('div');badge.className='jci-accred';badge.title='Institución acreditada por Joint Commission International';badge.setAttribute('aria-label','Acreditado por Joint Commission International');badge.innerHTML='<span class="jci-seal" aria-hidden="true"></span><span>Acreditado JCI</span>';first.appendChild(badge);});}addJciBadges();new MutationObserver(addJciBadges).observe(document.body,{childList:true,subtree:true});window.addEventListener('load',addJciBadges,{once:true});})();</script>'''
+          s=s.replace('</body>',script+'\n</body>',1)
+          p.write_text(s,encoding='utf-8')
           PY
 
       - name: Configurar Pages
