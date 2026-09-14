@@ -23,13 +23,58 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Preparar logo Otamendi
+
+      - name: Preparar identidad y responsive
         run: |
-          sed -i 's|logo_otamendi.svg?v=20260914-1|logo_otamendi.png?v=20260914-5|g' index.html
-          sed -i 's|logo_otamendi.png?v=20260914-3|logo_otamendi.png?v=20260914-5|g' index.html
-          sed -i 's|logo_otamendi.png?v=20260914-4|logo_otamendi.png?v=20260914-5|g' index.html
-          sed -i 's|filter:brightness(0) invert(1);opacity:1|filter:invert(70%);opacity:1|g' index.html
-          sed -i 's|filter:invert(68%);opacity:1|filter:invert(70%);opacity:1|g' index.html
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+
+          # El logo queda inline: no depende de PNG, SVG externo ni cache del navegador.
+          logo = '''<div class="brand-lockup" aria-label="Sanatorio Otamendi">
+          <svg class="otamendi-seal" viewBox="0 0 220 225" role="img" aria-label="Sanatorio Otamendi" xmlns="http://www.w3.org/2000/svg">
+            <g fill="none" stroke="#b7b7b7" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M47 177C20 155 13 118 23 84C31 57 50 36 76 24"/>
+              <path d="M173 177C200 155 207 118 197 84C189 57 170 36 144 24"/>
+              <path d="M35 157l-15 4m20-19-18 1m23-18-19-3m26-15-18-7m27-12-17-10m31-7-14-14m33-1-9-17"/>
+              <path d="M185 157l15 4m-20-19 18 1m-23-18 19-3m-26-15 18-7m-27-12 17-10m-31-7 14-14m-33-1 9-17"/>
+              <circle cx="110" cy="105" r="69"/>
+              <circle cx="110" cy="105" r="57" stroke-width="2.5"/>
+              <path d="M70 82h80M65 92h90M64 102h92M64 112h92M67 122h86M72 132h76" stroke-width="2"/>
+              <path d="M110 54v99M94 66h32M100 61h20" stroke-width="5"/>
+              <path d="M92 80c8 6 28 6 36 0c-4 18-7 35-7 53c0 12-4 22-11 29c-7-7-11-17-11-29c0-18-3-35-7-53z" fill="#b7b7b7" stroke="none"/>
+              <path d="M100 93c-8 8-7 15 10 21c17 6 18 13 10 21M120 93c8 8 7 15-10 21c-17 6-18 13-10 21" stroke="#7b1720" stroke-width="3"/>
+              <path d="M110 31l6 9h-12z" fill="#b7b7b7" stroke="none"/>
+              <path d="M55 188c34 7 76 7 110 0l-8 19c-31 6-63 6-94 0z" fill="#b7b7b7" stroke="#b7b7b7"/>
+            </g>
+            <text x="110" y="61" text-anchor="middle" fill="#b7b7b7" font-family="Arial,sans-serif" font-size="11" font-weight="700" letter-spacing="2">OTAMENDI</text>
+            <text x="110" y="201" text-anchor="middle" fill="#7b1720" font-family="Arial,sans-serif" font-size="8" font-weight="700" letter-spacing="2">ARGENTINA</text>
+          </svg>
+          </div>'''
+
+          s = re.sub(r'<div class="brand-lockup">.*?</div>', logo, s, count=1, flags=re.S)
+
+          responsive = '''
+          /* Ajuste estructural 14-09: logo autocontenido + tablero sin cortes */
+          .brand-lockup{height:205px!important;margin:6px 0 10px!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:visible!important}
+          .otamendi-seal{display:block;width:150px;height:154px;max-width:90%;overflow:visible}
+          .app{grid-template-columns:220px minmax(0,1fr)!important;width:100%;max-width:100vw;overflow-x:hidden}
+          main{min-width:0!important;width:100%!important;overflow-x:hidden!important}
+          .cards{grid-template-columns:repeat(5,minmax(0,1fr))!important}
+          .card{min-width:0!important}.card .value{overflow-wrap:anywhere}
+          .grid2{grid-template-columns:minmax(0,1.5fr) minmax(250px,.72fr)!important;min-width:0}
+          .panel,.status-box{min-width:0}.status-box p,.panel p{overflow-wrap:anywhere}
+          @media(max-width:1250px){.cards{grid-template-columns:repeat(3,minmax(0,1fr))!important}.grid2{grid-template-columns:1fr!important}}
+          @media(max-width:900px){.app{grid-template-columns:190px minmax(0,1fr)!important}.cards{grid-template-columns:repeat(2,minmax(0,1fr))!important}.brand-lockup{height:175px!important}.otamendi-seal{width:128px;height:132px}}
+          @media(max-width:700px){.app{grid-template-columns:1fr!important;overflow:visible}.cards{grid-template-columns:1fr!important}.brand-lockup{height:165px!important}.otamendi-seal{width:122px;height:126px}}
+          '''
+          s = s.replace('</style>', responsive + '\n</style>', 1)
+          p.write_text(s, encoding='utf-8')
+          PY
+
       - name: Configurar Pages
         uses: actions/configure-pages@v5
         with:
