@@ -25,8 +25,11 @@ jobs:
         uses: actions/checkout@v4
       - name: Preparar logo Otamendi
         run: |
-          sed -i 's|logo_otamendi.svg?v=20260914-1|logo_otamendi.png?v=20260914-3|g' index.html
-          sed -i 's|filter:brightness(0) invert(1);opacity:1|filter:invert(68%);opacity:1|g' index.html
+          sed -i 's|logo_otamendi.svg?v=20260914-1|logo_otamendi.png?v=20260914-5|g' index.html
+          sed -i 's|logo_otamendi.png?v=20260914-3|logo_otamendi.png?v=20260914-5|g' index.html
+          sed -i 's|logo_otamendi.png?v=20260914-4|logo_otamendi.png?v=20260914-5|g' index.html
+          sed -i 's|filter:brightness(0) invert(1);opacity:1|filter:invert(70%);opacity:1|g' index.html
+          sed -i 's|filter:invert(68%);opacity:1|filter:invert(70%);opacity:1|g' index.html
       - name: Configurar Pages
         uses: actions/configure-pages@v5
         with:
