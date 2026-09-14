@@ -49,18 +49,18 @@
     },
     {
       "name": "Hospital Italiano",
-      "model": "A relevar",
-      "responsible": "A validar",
-      "scale": "A validar",
-      "technology": "Alta madurez digital",
-      "status": "Pendiente",
-      "statusClass": "no",
-      "key": "Institución comparable/JCI",
-      "next": "Contacto directo",
-      "source": "Web institucional",
-      "confirmed": false,
-      "ai": null,
-      "referenceType": "Referencia"
+      "model": "Triage presencial estructurado + soporte digital integrado a HCE",
+      "responsible": "Enfermería",
+      "scale": "Protocolo institucional · escala/niveles a confirmar",
+      "technology": "HCE propia + CDA de Guardia + TANA/TanaGPT (IA integrada a HCE)",
+      "status": "Productivo · validado",
+      "statusClass": "ok",
+      "key": "Triage activo en Central de Emergencias. La evaluación genera un documento clínico CDA integrado a la HCE con signos vitales, diagnóstico, resultado asistencial y prioridad de atención. Reporte institucional: 42.759 documentos de Guardia. TanaGPT fue pilotado en Emergencias Adultos y existe antecedente de bot clínico para identificar pacientes que requieren atención prioritaria.",
+      "next": "Confirmar escala exacta, dotación simultánea por turno, pacientes/día, tiempo medio de triage, criterios de re-triage y si la IA interviene actualmente en la asignación de prioridad clínica.",
+      "source": "Hospital Italiano · Reporte de Gestión 2024–2025 + material institucional TANA/TanaGPT + formación institucional de Triage",
+      "confirmed": true,
+      "ai": true,
+      "referenceType": "Caso productivo / referencia digital"
     },
     {
       "name": "Galeno · TTS (Trinidad Triage System)",
@@ -187,63 +187,423 @@
     }
   ],
   "suppliers": [
-    {"id":"certuma","name":"Certuma","country":"AR","url":"https://www.certuma.ai/"},
-    {"id":"oops","name":"TrIAge / Oops","country":"AR","url":"https://triage.oops.ar/"},
-    {"id":"cloud","name":"CloudSaúde / Sinamnese","country":"BR","url":"https://www.cloudsaude.com.br/sinamnese"},
-    {"id":"guardia","name":"Guardia Virtual","country":"AR","url":"https://www.guardiavirtualmedica.com/es/servicios/"},
-    {"id":"uma","name":"ÜMA","country":"AR / LATAM","url":"https://umatech.ai/"}
+    {
+      "id": "certuma",
+      "name": "Certuma",
+      "country": "AR",
+      "url": "https://www.certuma.ai/"
+    },
+    {
+      "id": "oops",
+      "name": "TrIAge / Oops",
+      "country": "AR",
+      "url": "https://triage.oops.ar/"
+    },
+    {
+      "id": "cloud",
+      "name": "CloudSaúde / Sinamnese",
+      "country": "BR",
+      "url": "https://www.cloudsaude.com.br/sinamnese"
+    },
+    {
+      "id": "guardia",
+      "name": "Guardia Virtual",
+      "country": "AR",
+      "url": "https://www.guardiavirtualmedica.com/es/servicios/"
+    },
+    {
+      "id": "uma",
+      "name": "ÜMA",
+      "country": "AR / LATAM",
+      "url": "https://umatech.ai/"
+    }
   ],
   "supplierCriteria": [
-    {"criterion":"Triage específico","certuma":"✓","oops":"✓","cloud":"✓","guardia":"✓","uma":"✓ / Pre-Doc"},
-    {"criterion":"Captura autónoma paciente","certuma":"✓*","oops":"Voz/chat/formulario*","cloud":"Parcial / validar","guardia":"✓","uma":"✓"},
-    {"criterion":"Tótem","certuma":"✓*","oops":"A validar","cloud":"Estación de triage","guardia":"✓","uma":"Recepción digital"},
-    {"criterion":"Conversacional","certuma":"✓*","oops":"✓ voz/chat","cloud":"No eje principal","guardia":"✓ NLP","uma":"✓ Patient AI"},
-    {"criterion":"Signos vitales","certuma":"✓*","oops":"✓","cloud":"✓","guardia":"✓ telemetría","uma":"A validar"},
-    {"criterion":"Escala clínica","certuma":"A validar","oops":"ESI v4","cloud":"Manchester / propia","guardia":"5 niveles; validar escala","uma":"A validar"},
-    {"criterion":"Recomienda prioridad","certuma":"✓*","oops":"✓","cloud":"✓","guardia":"✓","uma":"✓ / derivación"},
-    {"criterion":"Clasifica automáticamente","certuma":"A validar alcance","oops":"Sugiere ESI","cloud":"Motor recomienda","guardia":"✓*","uma":"A validar"},
-    {"criterion":"Validación Enfermería","certuma":"✓*","oops":"✓ obligatoria","cloud":"✓ decisión final","guardia":"A validar","uma":"A validar"},
-    {"criterion":"Red flags","certuma":"A validar","oops":"✓","cloud":"✓ alertas/riesgos","guardia":"A validar","uma":"✓*"},
-    {"criterion":"Re-triage","certuma":"A validar","oops":"A validar","cloud":"✓ seguimiento","guardia":"A validar","uma":"A validar"},
-    {"criterion":"Trazabilidad decisión","certuma":"A validar","oops":"✓ alta","cloud":"✓","guardia":"A validar","uma":"✓"},
-    {"criterion":"Explicabilidad","certuma":"A validar","oops":"✓ white-box","cloud":"Parcial / protocolo","guardia":"A validar","uma":"Declara IA explicable*"},
-    {"criterion":"HL7/FHIR/API","certuma":"A validar","oops":"API; HL7/FHIR validar","cloud":"✓ FHIR/HL7","guardia":"A validar","uma":"✓ HL7/FHIR"},
-    {"criterion":"Integración ThinkSoft","certuma":"A validar","oops":"A validar","cloud":"A validar","guardia":"A validar","uma":"A validar"},
-    {"criterion":"Referencias hospitalarias","certuma":"Pedir referencias","oops":"A validar","cloud":"UPA Campos Salles","guardia":"A validar","uma":"Referencias salud"},
-    {"criterion":"Casos LATAM","certuma":"A validar","oops":"Argentina*","cloud":"Brasil","guardia":"A validar","uma":"Perú / México / otros"},
-    {"criterion":"Evidencia publicada","certuma":"A relevar","oops":"Técnica propia","cloud":"Caso productivo propio","guardia":"Claims comerciales","uma":"Casos propios"},
-    {"criterion":"Tiempo implementación","certuma":"A cotizar","oops":"A cotizar","cloud":"A cotizar","guardia":"A cotizar","uma":"A cotizar"},
-    {"criterion":"Soporte Argentina","certuma":"✓","oops":"✓","cloud":"No identificado","guardia":"✓","uma":"✓"},
-    {"criterion":"Costo implementación","certuma":"A cotizar","oops":"A cotizar","cloud":"A cotizar","guardia":"A cotizar","uma":"A cotizar"},
-    {"criterion":"Licencia mensual","certuma":"A cotizar","oops":"A cotizar","cloud":"A cotizar","guardia":"A cotizar","uma":"A cotizar"},
-    {"criterion":"Otros costos","certuma":"A cotizar","oops":"Interfaces/hardware*","cloud":"Estación/interfaces*","guardia":"Tótem/dispositivos*","uma":"Integraciones/tótem*"},
-    {"criterion":"TCO año 1","certuma":"Pendiente","oops":"Pendiente","cloud":"Pendiente","guardia":"Pendiente","uma":"Pendiente"},
-    {"criterion":"Algoritmo / protocolo gobernante","certuma":"A validar","oops":"Reglas + ESI + IA semántica","cloud":"IA analítica + Manchester/reglas","guardia":"A validar","uma":"A validar"},
-    {"criterion":"Subtriage / sobretriage","certuma":"A validar","oops":"A validar","cloud":"No publicado","guardia":"No publicado","uma":"No publicado"},
-    {"criterion":"Concordancia IA-Enfermería","certuma":"A validar","oops":"A validar","cloud":"No publicado","guardia":"No publicado","uma":"No publicado"},
-    {"criterion":"Regulación / SaMD","certuma":"A validar","oops":"Declara desarrollo SaMD*","cloud":"A validar","guardia":"A validar","uma":"A validar"},
-    {"criterion":"Decisión clínica final","certuma":"A validar","oops":"Enfermería","cloud":"Enfermería","guardia":"A validar","uma":"A validar"}
+    {
+      "criterion": "Triage específico",
+      "certuma": "✓",
+      "oops": "✓",
+      "cloud": "✓",
+      "guardia": "✓",
+      "uma": "✓ / Pre-Doc"
+    },
+    {
+      "criterion": "Captura autónoma paciente",
+      "certuma": "✓*",
+      "oops": "Voz/chat/formulario*",
+      "cloud": "Parcial / validar",
+      "guardia": "✓",
+      "uma": "✓"
+    },
+    {
+      "criterion": "Tótem",
+      "certuma": "✓*",
+      "oops": "A validar",
+      "cloud": "Estación de triage",
+      "guardia": "✓",
+      "uma": "Recepción digital"
+    },
+    {
+      "criterion": "Conversacional",
+      "certuma": "✓*",
+      "oops": "✓ voz/chat",
+      "cloud": "No eje principal",
+      "guardia": "✓ NLP",
+      "uma": "✓ Patient AI"
+    },
+    {
+      "criterion": "Signos vitales",
+      "certuma": "✓*",
+      "oops": "✓",
+      "cloud": "✓",
+      "guardia": "✓ telemetría",
+      "uma": "A validar"
+    },
+    {
+      "criterion": "Escala clínica",
+      "certuma": "A validar",
+      "oops": "ESI v4",
+      "cloud": "Manchester / propia",
+      "guardia": "5 niveles; validar escala",
+      "uma": "A validar"
+    },
+    {
+      "criterion": "Recomienda prioridad",
+      "certuma": "✓*",
+      "oops": "✓",
+      "cloud": "✓",
+      "guardia": "✓",
+      "uma": "✓ / derivación"
+    },
+    {
+      "criterion": "Clasifica automáticamente",
+      "certuma": "A validar alcance",
+      "oops": "Sugiere ESI",
+      "cloud": "Motor recomienda",
+      "guardia": "✓*",
+      "uma": "A validar"
+    },
+    {
+      "criterion": "Validación Enfermería",
+      "certuma": "✓*",
+      "oops": "✓ obligatoria",
+      "cloud": "✓ decisión final",
+      "guardia": "A validar",
+      "uma": "A validar"
+    },
+    {
+      "criterion": "Red flags",
+      "certuma": "A validar",
+      "oops": "✓",
+      "cloud": "✓ alertas/riesgos",
+      "guardia": "A validar",
+      "uma": "✓*"
+    },
+    {
+      "criterion": "Re-triage",
+      "certuma": "A validar",
+      "oops": "A validar",
+      "cloud": "✓ seguimiento",
+      "guardia": "A validar",
+      "uma": "A validar"
+    },
+    {
+      "criterion": "Trazabilidad decisión",
+      "certuma": "A validar",
+      "oops": "✓ alta",
+      "cloud": "✓",
+      "guardia": "A validar",
+      "uma": "✓"
+    },
+    {
+      "criterion": "Explicabilidad",
+      "certuma": "A validar",
+      "oops": "✓ white-box",
+      "cloud": "Parcial / protocolo",
+      "guardia": "A validar",
+      "uma": "Declara IA explicable*"
+    },
+    {
+      "criterion": "HL7/FHIR/API",
+      "certuma": "A validar",
+      "oops": "API; HL7/FHIR validar",
+      "cloud": "✓ FHIR/HL7",
+      "guardia": "A validar",
+      "uma": "✓ HL7/FHIR"
+    },
+    {
+      "criterion": "Integración ThinkSoft",
+      "certuma": "A validar",
+      "oops": "A validar",
+      "cloud": "A validar",
+      "guardia": "A validar",
+      "uma": "A validar"
+    },
+    {
+      "criterion": "Referencias hospitalarias",
+      "certuma": "Pedir referencias",
+      "oops": "A validar",
+      "cloud": "UPA Campos Salles",
+      "guardia": "A validar",
+      "uma": "Referencias salud"
+    },
+    {
+      "criterion": "Casos LATAM",
+      "certuma": "A validar",
+      "oops": "Argentina*",
+      "cloud": "Brasil",
+      "guardia": "A validar",
+      "uma": "Perú / México / otros"
+    },
+    {
+      "criterion": "Evidencia publicada",
+      "certuma": "A relevar",
+      "oops": "Técnica propia",
+      "cloud": "Caso productivo propio",
+      "guardia": "Claims comerciales",
+      "uma": "Casos propios"
+    },
+    {
+      "criterion": "Tiempo implementación",
+      "certuma": "A cotizar",
+      "oops": "A cotizar",
+      "cloud": "A cotizar",
+      "guardia": "A cotizar",
+      "uma": "A cotizar"
+    },
+    {
+      "criterion": "Soporte Argentina",
+      "certuma": "✓",
+      "oops": "✓",
+      "cloud": "No identificado",
+      "guardia": "✓",
+      "uma": "✓"
+    },
+    {
+      "criterion": "Costo implementación",
+      "certuma": "A cotizar",
+      "oops": "A cotizar",
+      "cloud": "A cotizar",
+      "guardia": "A cotizar",
+      "uma": "A cotizar"
+    },
+    {
+      "criterion": "Licencia mensual",
+      "certuma": "A cotizar",
+      "oops": "A cotizar",
+      "cloud": "A cotizar",
+      "guardia": "A cotizar",
+      "uma": "A cotizar"
+    },
+    {
+      "criterion": "Otros costos",
+      "certuma": "A cotizar",
+      "oops": "Interfaces/hardware*",
+      "cloud": "Estación/interfaces*",
+      "guardia": "Tótem/dispositivos*",
+      "uma": "Integraciones/tótem*"
+    },
+    {
+      "criterion": "TCO año 1",
+      "certuma": "Pendiente",
+      "oops": "Pendiente",
+      "cloud": "Pendiente",
+      "guardia": "Pendiente",
+      "uma": "Pendiente"
+    },
+    {
+      "criterion": "Algoritmo / protocolo gobernante",
+      "certuma": "A validar",
+      "oops": "Reglas + ESI + IA semántica",
+      "cloud": "IA analítica + Manchester/reglas",
+      "guardia": "A validar",
+      "uma": "A validar"
+    },
+    {
+      "criterion": "Subtriage / sobretriage",
+      "certuma": "A validar",
+      "oops": "A validar",
+      "cloud": "No publicado",
+      "guardia": "No publicado",
+      "uma": "No publicado"
+    },
+    {
+      "criterion": "Concordancia IA-Enfermería",
+      "certuma": "A validar",
+      "oops": "A validar",
+      "cloud": "No publicado",
+      "guardia": "No publicado",
+      "uma": "No publicado"
+    },
+    {
+      "criterion": "Regulación / SaMD",
+      "certuma": "A validar",
+      "oops": "Declara desarrollo SaMD*",
+      "cloud": "A validar",
+      "guardia": "A validar",
+      "uma": "A validar"
+    },
+    {
+      "criterion": "Decisión clínica final",
+      "certuma": "A validar",
+      "oops": "Enfermería",
+      "cloud": "Enfermería",
+      "guardia": "A validar",
+      "uma": "A validar"
+    }
   ],
   "gaps": [
-    {"id":"GAP-01","info":"Volumen y distribución horaria de la Guardia Otamendi","source":"Interna","owner":"A definir","priority":"Crítica","due":"14/09","status":"Pendiente","impact":"Dimensionamiento / business case"},
-    {"id":"GAP-02","info":"Mapear circuito actual de Guardia (sin triage) y tiempos puerta-médico","source":"Interna","owner":"Procesos / Guardia","priority":"Crítica","due":"14/09","status":"Pendiente","impact":"Línea de base / diseño TO-BE"},
-    {"id":"GAP-03","info":"Definir dotación objetivo del nuevo proceso de triage","source":"Interna + benchmark","owner":"Enfermería / Procesos","priority":"Crítica","due":"15/09","status":"Pendiente","impact":"Dimensionamiento"},
-    {"id":"GAP-04","info":"Definir interfaz de integración Triage IA ↔ ThinkSoft (FHIR/API)","source":"ThinkSoft + IT Otamendi","owner":"Sistemas / ThinkSoft","priority":"Alta","due":"15/09","status":"Parcial","impact":"Factibilidad técnica: capacidad de interoperabilidad confirmada; resta definir versión FHIR, recursos, lectura/escritura, autenticación, sandbox y costos"},
-    {"id":"GAP-05","info":"Completar Hospital Alemán: volumen, tiempo de triage, horario Gineco, HCE/integración y re-triage","source":"Hospital","owner":"Contacto","priority":"Media","due":"16/09","status":"Parcial","impact":"Benchmark; dotación ya relevada"},
-    {"id":"GAP-06","info":"Dotación Hospital Austral","source":"Hospital","owner":"Contacto","priority":"Media","due":"16/09","status":"Pendiente","impact":"Benchmark"},
-    {"id":"GAP-07","info":"Datos Hospital Italiano","source":"Hospital","owner":"Contacto","priority":"Media","due":"16/09","status":"Pendiente","impact":"Benchmark"},
-    {"id":"GAP-08","info":"Validar resultados Santa Rita","source":"Hospital/proveedor","owner":"Contacto","priority":"Alta","due":"16/09","status":"Parcial","impact":"Evidencia"},
-    {"id":"GAP-09","info":"Referencias Certuma","source":"Certuma","owner":"Certuma","priority":"Crítica","due":"15/09","status":"Pendiente","impact":"Evaluación"},
-    {"id":"GAP-10","info":"Integración Certuma","source":"Certuma/IT","owner":"Certuma","priority":"Crítica","due":"15/09","status":"Pendiente","impact":"Factibilidad"},
-    {"id":"GAP-11","info":"Precio Certuma","source":"Certuma","owner":"Certuma","priority":"Alta","due":"16/09","status":"Pendiente","impact":"Business case"},
-    {"id":"GAP-12","info":"Comparadores de mercado completos","source":"Mercado","owner":"Procesos","priority":"Alta","due":"15/09","status":"Parcial","impact":"Comparación"}
+    {
+      "id": "GAP-01",
+      "info": "Volumen y distribución horaria de la Guardia Otamendi",
+      "source": "Interna",
+      "owner": "A definir",
+      "priority": "Crítica",
+      "due": "14/09",
+      "status": "Pendiente",
+      "impact": "Dimensionamiento / business case"
+    },
+    {
+      "id": "GAP-02",
+      "info": "Mapear circuito actual de Guardia (sin triage) y tiempos puerta-médico",
+      "source": "Interna",
+      "owner": "Procesos / Guardia",
+      "priority": "Crítica",
+      "due": "14/09",
+      "status": "Pendiente",
+      "impact": "Línea de base / diseño TO-BE"
+    },
+    {
+      "id": "GAP-03",
+      "info": "Definir dotación objetivo del nuevo proceso de triage",
+      "source": "Interna + benchmark",
+      "owner": "Enfermería / Procesos",
+      "priority": "Crítica",
+      "due": "15/09",
+      "status": "Pendiente",
+      "impact": "Dimensionamiento"
+    },
+    {
+      "id": "GAP-04",
+      "info": "Definir interfaz de integración Triage IA ↔ ThinkSoft (FHIR/API)",
+      "source": "ThinkSoft + IT Otamendi",
+      "owner": "Sistemas / ThinkSoft",
+      "priority": "Alta",
+      "due": "15/09",
+      "status": "Parcial",
+      "impact": "Factibilidad técnica: capacidad de interoperabilidad confirmada; resta definir versión FHIR, recursos, lectura/escritura, autenticación, sandbox y costos"
+    },
+    {
+      "id": "GAP-05",
+      "info": "Completar Hospital Alemán: volumen, tiempo de triage, horario Gineco, HCE/integración y re-triage",
+      "source": "Hospital",
+      "owner": "Contacto",
+      "priority": "Media",
+      "due": "16/09",
+      "status": "Parcial",
+      "impact": "Benchmark; dotación ya relevada"
+    },
+    {
+      "id": "GAP-06",
+      "info": "Dotación Hospital Austral",
+      "source": "Hospital",
+      "owner": "Contacto",
+      "priority": "Media",
+      "due": "16/09",
+      "status": "Pendiente",
+      "impact": "Benchmark"
+    },
+    {
+      "id": "GAP-07",
+      "info": "Datos Hospital Italiano",
+      "source": "Hospital",
+      "owner": "Contacto",
+      "priority": "Media",
+      "due": "16/09",
+      "status": "Pendiente",
+      "impact": "Benchmark"
+    },
+    {
+      "id": "GAP-08",
+      "info": "Validar resultados Santa Rita",
+      "source": "Hospital/proveedor",
+      "owner": "Contacto",
+      "priority": "Alta",
+      "due": "16/09",
+      "status": "Parcial",
+      "impact": "Evidencia"
+    },
+    {
+      "id": "GAP-09",
+      "info": "Referencias Certuma",
+      "source": "Certuma",
+      "owner": "Certuma",
+      "priority": "Crítica",
+      "due": "15/09",
+      "status": "Pendiente",
+      "impact": "Evaluación"
+    },
+    {
+      "id": "GAP-10",
+      "info": "Integración Certuma",
+      "source": "Certuma/IT",
+      "owner": "Certuma",
+      "priority": "Crítica",
+      "due": "15/09",
+      "status": "Pendiente",
+      "impact": "Factibilidad"
+    },
+    {
+      "id": "GAP-11",
+      "info": "Precio Certuma",
+      "source": "Certuma",
+      "owner": "Certuma",
+      "priority": "Alta",
+      "due": "16/09",
+      "status": "Pendiente",
+      "impact": "Business case"
+    },
+    {
+      "id": "GAP-12",
+      "info": "Comparadores de mercado completos",
+      "source": "Mercado",
+      "owner": "Procesos",
+      "priority": "Alta",
+      "due": "15/09",
+      "status": "Parcial",
+      "impact": "Comparación"
+    }
   ],
   "timeline": [
-    {"date":"11/09","title":"Consolidar","text":"Benchmark web, matriz y preguntas faltantes."},
-    {"date":"14/09","title":"Contactar","text":"Hospitales y proveedores prioritarios."},
-    {"date":"15/09","title":"Relevar","text":"Datos internos Otamendi y demos."},
-    {"date":"16/09","title":"Comparar","text":"Score proveedores + escenarios."},
-    {"date":"17/09","title":"Recomendar","text":"Business case + piloto + cierre."},
-    {"date":"18/09","title":"Presentar","text":"Recomendación ejecutiva a Ramiro."}
+    {
+      "date": "11/09",
+      "title": "Consolidar",
+      "text": "Benchmark web, matriz y preguntas faltantes."
+    },
+    {
+      "date": "14/09",
+      "title": "Contactar",
+      "text": "Hospitales y proveedores prioritarios."
+    },
+    {
+      "date": "15/09",
+      "title": "Relevar",
+      "text": "Datos internos Otamendi y demos."
+    },
+    {
+      "date": "16/09",
+      "title": "Comparar",
+      "text": "Score proveedores + escenarios."
+    },
+    {
+      "date": "17/09",
+      "title": "Recomendar",
+      "text": "Business case + piloto + cierre."
+    },
+    {
+      "date": "18/09",
+      "title": "Presentar",
+      "text": "Recomendación ejecutiva a Ramiro."
+    }
   ]
 }
