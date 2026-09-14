@@ -24,6 +24,34 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Actualizar benchmark Hospital Austral
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+
+          p = Path('data.json')
+          d = json.loads(p.read_text(encoding='utf-8'))
+          for x in d.get('argentina', []):
+              if x.get('name') == 'Hospital Austral':
+                  x.update({
+                      'model': 'Triage presencial estructurado + triage virtual',
+                      'responsible': 'Enfermería en presencial · profesional en triage virtual',
+                      'scale': '5 niveles institucionales',
+                      'technology': 'VITA HCE + triage digital + Portal del Paciente + Guardia Virtual integrada',
+                      'status': 'Productivo · validado',
+                      'statusClass': 'ok',
+                      'key': '~650 pacientes/día en Emergencias; ~20% requiere mayor complejidad/observación. Todo paciente adulto o pediátrico pasa por triage. Niveles 1–3 se resuelven por Emergencias 24/7; niveles 4–5 pueden derivarse a Demanda Espontánea. El triage virtual puede asignar horario programado para atención presencial de baja complejidad. Picos reportados alrededor de 11:00 y 19:00; lunes y martes ~30% más demanda.',
+                      'next': 'Confirmar dotación simultánea de Enfermería en triage, tiempo promedio de clasificación, SLA por nivel, reglas de re-triage, tasa de concordancia y si VITA incorpora automatización o IA en la recomendación.',
+                      'source': 'Hospital Austral · Emergencias + Sistema de Triage + Guardia Programada + VITA + información institucional JCI',
+                      'confirmed': True,
+                      'ai': False,
+                      'referenceType': 'Caso productivo / referencia JCI'
+                  })
+                  break
+          p.write_text(json.dumps(d, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          PY
+
       - name: Preparar identidad y responsive
         run: |
           python3 - <<'PY'
