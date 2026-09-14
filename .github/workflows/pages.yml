@@ -66,7 +66,7 @@ jobs:
           p.write_text(json.dumps(d, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
           PY
 
-      - name: Preparar identidad y responsive
+      - name: Preparar identidad, responsive y sello JCI
         run: |
           python3 - <<'PY'
           from pathlib import Path
@@ -91,11 +91,50 @@ jobs:
           .card{min-width:0!important}.card .value{overflow-wrap:anywhere}
           .grid2{grid-template-columns:minmax(0,1.5fr) minmax(250px,.72fr)!important;min-width:0}
           .panel,.status-box{min-width:0}.status-box p,.panel p{overflow-wrap:anywhere}
+
+          /* Sello compacto JCI debajo del nombre, sin alterar anchos de tabla */
+          .jci-accred{display:flex;align-items:center;gap:5px;margin-top:5px;width:max-content;max-width:100%;font-size:7.4px;font-weight:800;color:#6e4d00;line-height:1;white-space:nowrap}
+          .jci-seal{width:21px;height:21px;min-width:21px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:radial-gradient(circle at 35% 30%,#fff2a8 0,#e9bd43 42%,#b77a00 100%);border:1px solid #b98511;box-shadow:inset 0 0 0 2px rgba(255,255,255,.35);color:#724a00;font-size:7px;font-weight:900;letter-spacing:-.2px}
+          .jci-seal:before{content:'JCI'}
+
           @media(max-width:1250px){.cards{grid-template-columns:repeat(3,minmax(0,1fr))!important}.grid2{grid-template-columns:1fr!important}}
           @media(max-width:900px){.app{grid-template-columns:190px minmax(0,1fr)!important}.cards{grid-template-columns:repeat(2,minmax(0,1fr))!important}.brand-lockup{height:175px!important}.otamendi-seal-img{width:128px!important}}
           @media(max-width:700px){.app{grid-template-columns:1fr!important;overflow:visible}.cards{grid-template-columns:1fr!important}.brand-lockup{height:165px!important}.otamendi-seal-img{width:122px!important}}
           '''
           s = s.replace('</style>', responsive + '\n</style>', 1)
+
+          jci_script = '''
+          <script>
+          (function(){
+            const jciNames = new Set([
+              'Hospital Italiano',
+              'Hospital Alemán',
+              'Hospital Austral',
+              'Hospital Privado Universitario de Córdoba'
+            ]);
+            function addJciBadges(){
+              document.querySelectorAll('tbody tr').forEach(row=>{
+                const first = row.querySelector('td:first-child');
+                if(!first || first.querySelector('.jci-accred')) return;
+                const raw = first.textContent.replace(/\s+/g,' ').trim();
+                const match = [...jciNames].find(name => raw.includes(name));
+                if(!match) return;
+                const badge = document.createElement('div');
+                badge.className = 'jci-accred';
+                badge.setAttribute('title','Institución acreditada por Joint Commission International');
+                badge.setAttribute('aria-label','Acreditado por Joint Commission International');
+                badge.innerHTML = '<span class="jci-seal" aria-hidden="true"></span><span>Acreditado JCI</span>';
+                first.appendChild(badge);
+              });
+            }
+            addJciBadges();
+            const obs = new MutationObserver(addJciBadges);
+            obs.observe(document.body,{childList:true,subtree:true});
+            window.addEventListener('load',addJciBadges,{once:true});
+          })();
+          </script>
+          '''
+          s = s.replace('</body>', jci_script + '\n</body>', 1)
           p.write_text(s, encoding='utf-8')
           PY
 
