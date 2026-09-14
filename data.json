@@ -4,10 +4,10 @@
     "subtitle": "Benchmark, alternativas tecnológicas y preparación de decisión",
     "project": "Proyecto Otamendi · Benchmark & Business Case",
     "deadline": "18/09/2026",
-    "lastUpdated": "11/09/2026",
+    "lastUpdated": "14/09/2026",
     "modelTarget": "Recomendador",
     "modelFoot": "IA propone · Enfermería valida",
-    "progress": 42,
+    "progress": 45,
     "executiveReading": "Otamendi no cuenta actualmente con un proceso formal de triage. El proyecto parte de un escenario greenfield: el benchmark y la evaluación tecnológica deben servir para diseñar el modelo objetivo, definir la dotación necesaria y establecer los indicadores base del nuevo circuito, manteniendo validación profesional.",
     "workingHypothesis": "Diseñar e implementar un nuevo proceso de triage para Otamendi bajo un modelo Recomendador: captura digital + IA + recomendación de prioridad + validación de Enfermería + integración con ThinkSoft.",
     "otamendiAsIs": {
@@ -61,6 +61,21 @@
       "confirmed": false,
       "ai": null,
       "referenceType": "Referencia"
+    },
+    {
+      "name": "Galeno · TTS (Trinidad Triage System)",
+      "model": "Triage digital estructurado",
+      "responsible": "Enfermería / personal clínico capacitado",
+      "scale": "TTS propio",
+      "technology": "Sistema digital propio Galeno",
+      "status": "Productivo",
+      "statusClass": "ok",
+      "key": "Desarrollado para los 6 sanatorios de Galeno; implementación inicial en guardias de Clínica Médica y Pediatría. Primera puesta en producción: 23/02/2023.",
+      "next": "Completar dotación por turno, tiempo de triage, arquitectura/integración y métricas de resultados",
+      "source": "Estudio / material relevado sobre TTS",
+      "confirmed": true,
+      "ai": false,
+      "referenceType": "Caso productivo"
     },
     {
       "name": "SAP-RN · ALTEC + Google",
