@@ -1,0 +1,48 @@
+name: Update Hospital Italiano benchmark
+on:
+  push:
+    paths:
+      - '.github/workflows/update-hospital-italiano.yml'
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Update benchmark data
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('data.json')
+          d=json.loads(p.read_text(encoding='utf-8'))
+          for x in d['argentina']:
+              if x['name']=='Hospital Italiano':
+                  x.update({
+                    'model':'Triage presencial estructurado + soporte digital integrado a HCE',
+                    'responsible':'Enfermería',
+                    'scale':'Protocolo institucional · escala/niveles a confirmar',
+                    'technology':'HCE propia + CDA de Guardia + TANA/TanaGPT (IA integrada a HCE)',
+                    'status':'Productivo · validado',
+                    'statusClass':'ok',
+                    'key':'Triage activo en Central de Emergencias. La evaluación genera un documento clínico CDA integrado a la HCE con signos vitales, diagnóstico, resultado asistencial y prioridad de atención. Reporte institucional: 42.759 documentos de Guardia. TanaGPT fue pilotado en Emergencias Adultos y existe antecedente de bot clínico para identificar pacientes que requieren atención prioritaria.',
+                    'next':'Confirmar escala exacta, dotación simultánea por turno, pacientes/día, tiempo medio de triage, criterios de re-triage y si la IA interviene actualmente en la asignación de prioridad clínica.',
+                    'source':'Hospital Italiano · Reporte de Gestión 2024–2025 + material institucional TANA/TanaGPT + formación institucional de Triage',
+                    'confirmed':True,
+                    'ai':True,
+                    'referenceType':'Caso productivo / referencia digital'
+                  })
+          # Executive benchmark count is derived in UI from confirmed flags; Italiano now moves Argentina to 4/5 validated.
+          p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          PY
+      - name: Commit update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          rm .github/workflows/update-hospital-italiano.yml
+          git add data.json .github/workflows/update-hospital-italiano.yml
+          git commit -m "Enrich Hospital Italiano triage benchmark"
+          git push
