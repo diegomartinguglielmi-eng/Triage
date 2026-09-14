@@ -1,0 +1,72 @@
+name: Incorporar nuevos casos benchmark
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-data:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Incorporar casos
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('data.json')
+          d=json.loads(p.read_text(encoding='utf-8'))
+          cases=d['argentina']
+          new=[
+            {
+              "name":"Hospital Privado Universitario de Córdoba",
+              "model":"Triage presencial estructurado + circuito diferenciado de baja complejidad",
+              "responsible":"A confirmar",
+              "scale":"Triage institucional · escala/niveles a confirmar",
+              "technology":"HCE institucional + autogestión digital + Telemedicina + telepresencia en Guardia",
+              "status":"Productivo · validado",
+              "statusClass":"ok",
+              "key":"Guardia 24/7 en sedes Central y Núñez. En sede central el triage valora gravedad y riesgo vital y define prioridad. Atención Ambulatoria absorbe cuadros agudos sin emergencia. Institución acreditada JCI desde 2024; referencia institucional: 240 camas, 48 camas UTI y ~1,8 M de consultas médicas/año (volumen institucional, no exclusivo de Guardia).",
+              "next":"Confirmar responsable del triage, escala y niveles exactos, dotación simultánea, pacientes/día de Guardia, tiempo medio de clasificación, re-triage, integración específica con HCE y eventual automatización/IA.",
+              "source":"Hospital Privado Universitario de Córdoba · Guardia Médica + Institucional + Telemedicina + acreditación JCI",
+              "confirmed":True,
+              "ai":False,
+              "referenceType":"Caso productivo / referencia JCI"
+            },
+            {
+              "name":"Sanatorio Finochietto",
+              "model":"Triage presencial estructurado",
+              "responsible":"Enfermería",
+              "scale":"Método de triage institucional · escala/niveles a confirmar",
+              "technology":"HCE institucional integrada al circuito de Emergencias · sin evidencia pública de IA clasificatoria",
+              "status":"Productivo · validado",
+              "statusClass":"ok",
+              "key":"Enfermería realiza evaluación inicial con preguntas y signos vitales para clasificar prioridad. Guardia 24/7/365 con 7 consultorios, 9 camas individuales de observación y 2 posiciones de Shock Room. Referencia histórica 2017: 36.755 consultas de Emergencias (~101/día) y 2.994 internaciones; usar como antecedente, no como volumen actual.",
+              "next":"Confirmar escala/niveles, dotación simultánea y puestos de triage, pacientes/día actuales, tiempo medio, SLA por nivel, distribución de categorías, re-triage e integración funcional del triage con HCE/IA.",
+              "source":"Sanatorio Finochietto · Emergencias + evidencia institucional de Enfermería + publicación científica con datos históricos de Guardia",
+              "confirmed":True,
+              "ai":False,
+              "referenceType":"Caso productivo / referencia digital"
+            }
+          ]
+          by={x['name']:x for x in cases}
+          for x in new: by[x['name']]=x
+          # conservar orden existente y agregar nuevos al final, sin duplicados
+          names=[x['name'] for x in cases]
+          for x in new:
+            if x['name'] not in names: names.append(x['name'])
+          d['argentina']=[by[n] for n in names]
+          p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          PY
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data.json
+          git diff --cached --quiet || git commit -m "Add Córdoba Privado and Finochietto to Argentina benchmark"
+          git push
