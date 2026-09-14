@@ -1,0 +1,43 @@
+name: Corregir logo Otamendi
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-logo.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix-logo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Corregir referencia y color del logo
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          old_src = 'src="logo_otamendi.svg?v=20260914-1"'
+          new_src = 'src="logo_otamendi.png?v=20260914-4"'
+          old_filter = 'filter:brightness(0) invert(1);opacity:1'
+          new_filter = 'filter:invert(70%);opacity:1'
+          if old_src not in s:
+              raise SystemExit('No se encontró la referencia SVG esperada en index.html')
+          s = s.replace(old_src, new_src)
+          s = s.replace(old_filter, new_filter)
+          p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Commit y push
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Usar PNG gris del logo Otamendi en el tablero"
+          git push
