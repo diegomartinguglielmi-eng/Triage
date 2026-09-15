@@ -1,66 +1,551 @@
 {
-  "meta": {"title":"Tablero ejecutivo · Triage IA","subtitle":"Benchmark, alternativas tecnológicas y preparación de decisión","project":"Proyecto Otamendi · Benchmark & Business Case","deadline":"18/09/2026","lastUpdated":"15/09/2026","modelTarget":"Recomendador","modelFoot":"IA propone · Enfermería valida","progress":45,"executiveReading":"Otamendi no cuenta actualmente con un proceso formal de triage. El proyecto parte de un escenario greenfield: el benchmark y la evaluación tecnológica deben servir para diseñar el modelo objetivo, definir la dotación necesaria y establecer los indicadores base del nuevo circuito, manteniendo validación profesional.","workingHypothesis":"Diseñar e implementar un nuevo proceso de triage para Otamendi bajo un modelo Recomendador: captura digital + IA + recomendación de prioridad + validación de Enfermería + integración con ThinkSoft.","otamendiAsIs":{"triageActual":"No existe","modelo":"Guardia sin proceso formal de triage","implicancia":"No hay tiempo ni dotación actual de triage para tomar como baseline; deben definirse contra el circuito actual de Guardia."}},
+  "meta": {
+    "title": "Tablero ejecutivo · Triage IA",
+    "subtitle": "Benchmark, alternativas tecnológicas y preparación de decisión",
+    "project": "Proyecto Otamendi · Benchmark & Business Case",
+    "deadline": "18/09/2026",
+    "lastUpdated": "15/09/2026",
+    "modelTarget": "Recomendador",
+    "modelFoot": "IA propone · Enfermería valida",
+    "progress": 45,
+    "executiveReading": "Otamendi no cuenta actualmente con un proceso formal de triage. El proyecto parte de un escenario greenfield: el benchmark y la evaluación tecnológica deben servir para diseñar el modelo objetivo, definir la dotación necesaria y establecer los indicadores base del nuevo circuito, manteniendo validación profesional.",
+    "workingHypothesis": "Diseñar e implementar un nuevo proceso de triage para Otamendi bajo un modelo Recomendador: captura digital + IA + recomendación de prioridad + validación de Enfermería + integración con ThinkSoft.",
+    "otamendiAsIs": {
+      "triageActual": "No existe",
+      "modelo": "Guardia sin proceso formal de triage",
+      "implicancia": "No hay tiempo ni dotación actual de triage para tomar como baseline; deben definirse contra el circuito actual de Guardia."
+    }
+  },
   "argentina": [
-    {"name":"Hospital Alemán","model":"Triage presencial estructurado + circuitos diferenciados de baja complejidad","responsible":"Enfermería. Dotación relevada: Adultos 1 enf. 24 h · Pediatría 1 enf. 24 h · Ginecología 1 enf. Lun–Vie (horario a confirmar). Base simultánea: 2; máxima: 3.","scale":"Manchester adaptado · 5 niveles con tiempos objetivo","technology":"Registro clínico institucional + Guardia por Videoconsulta / canales digitales de baja complejidad · sin evidencia pública de IA clasificatoria","status":"Productivo · validado","statusClass":"ok","key":"Triage formal y productivo como primer paso de Guardia. 5 niveles: Rojo inmediato; Naranja 5–15 min; Violeta 60 min; Amarillo 120 min; Verde 180 min. Centro de Emergencias 24/7/365, Unidad de Observación con 17 boxes y circuito ABCD para baja complejidad. La institución reportó históricamente >50.000 atenciones/año. Existe Guardia por Videoconsulta para baja complejidad y posibilidad de reevaluar la prioridad si cambia el cuadro durante la espera.","next":"Confirmar pacientes/día actuales, tiempo medio real de triage, distribución por nivel, horario/dotación Ginecología, tasa y reglas formales de re-triage, sistema/HCE utilizado, integración y eventual automatización/IA.","source":"Relevamiento directo + Hospital Alemán · Centro de Emergencias + material institucional de Triage + Guardia por Videoconsulta","confirmed":true,"ai":false,"referenceType":"Caso productivo / referencia operativa"},
-    {"name":"Hospital Austral","model":"Triage presencial estructurado + triage virtual","responsible":"Enfermería en presencial · profesional en triage virtual","scale":"5 niveles institucionales","technology":"VITA HCE + triage digital + Portal del Paciente + Guardia Virtual integrada","status":"Productivo · validado","statusClass":"ok","key":"~650 pacientes/día en Emergencias; ~20% requiere mayor complejidad/observación. Todo paciente adulto o pediátrico pasa por triage. Niveles 1–3 se resuelven por Emergencias 24/7; niveles 4–5 pueden derivarse a Demanda Espontánea. El triage virtual puede asignar horario programado para atención presencial de baja complejidad. Picos reportados alrededor de 11:00 y 19:00; lunes y martes ~30% más demanda.","next":"Confirmar dotación simultánea de Enfermería en triage, tiempo promedio de clasificación, SLA por nivel, reglas de re-triage, tasa de concordancia y si VITA incorpora automatización o IA en la recomendación.","source":"Hospital Austral · Emergencias + Sistema de Triage + Guardia Programada + VITA + información institucional JCI","confirmed":true,"ai":false,"referenceType":"Caso productivo / referencia JCI"},
-    {"name":"Hospital Italiano","model":"Triage presencial estructurado + soporte digital integrado a HCE","responsible":"Enfermería","scale":"Protocolo institucional · escala/niveles a confirmar","technology":"HCE propia + CDA de Guardia + TANA/TanaGPT (IA integrada a HCE)","status":"Productivo · validado","statusClass":"ok","key":"Triage activo en Central de Emergencias. La evaluación genera un documento clínico CDA integrado a la HCE con signos vitales, diagnóstico, resultado asistencial y prioridad de atención. Reporte institucional: 42.759 documentos de Guardia. TanaGPT fue pilotado en Emergencias Adultos y existe antecedente de bot clínico para identificar pacientes que requieren atención prioritaria.","next":"Confirmar escala exacta, dotación simultánea por turno, pacientes/día, tiempo medio de triage, criterios de re-triage y si la IA interviene actualmente en la asignación de prioridad clínica.","source":"Hospital Italiano · Reporte de Gestión 2024–2025 + material institucional TANA/TanaGPT + formación institucional de Triage","confirmed":true,"ai":true,"referenceType":"Caso productivo / referencia digital"},
-    {"name":"Galeno · TTS (Trinidad Triage System)","model":"Triage digital estructurado","responsible":"Enfermería / personal clínico capacitado","scale":"TTS propio","technology":"Sistema digital propio Galeno","status":"Productivo","statusClass":"ok","key":"Desarrollado para los 6 sanatorios de Galeno; implementación inicial en guardias de Clínica Médica y Pediatría. Primera puesta en producción: 23/02/2023.","next":"Completar dotación por turno, tiempo de triage, arquitectura/integración y métricas de resultados","source":"Estudio / material relevado sobre TTS","confirmed":true,"ai":false,"referenceType":"Caso productivo"},
-    {"name":"SAP-RN · ALTEC + Google","model":"IA asistiendo organización de guardia","responsible":"Enfermería define prioridad","scale":"Protocolos de emergencia Río Negro","technology":"IA Google + plataforma ALTEC","status":"Piloto real","statusClass":"ok","key":"Viedma; expansión prevista a Cipolletti","next":"Buscar resultados de piloto y contacto","source":"ALTEC / información pública","confirmed":true,"ai":true,"referenceType":"Caso IA"},
-    {"name":"Hospital Privado Universitario de Córdoba","model":"Triage presencial estructurado + circuito diferenciado de baja complejidad","responsible":"A confirmar","scale":"Triage institucional · escala/niveles a confirmar","technology":"HCE institucional + autogestión digital + Telemedicina + telepresencia en Guardia","status":"Productivo · validado","statusClass":"ok","key":"Guardia 24/7 en sedes Central y Núñez. En sede central el triage valora gravedad y riesgo vital y define prioridad. Atención Ambulatoria absorbe cuadros agudos sin emergencia. Institución acreditada JCI desde 2024; referencia institucional: 240 camas, 48 camas UTI y ~1,8 M de consultas médicas/año (volumen institucional, no exclusivo de Guardia).","next":"Confirmar responsable del triage, escala y niveles exactos, dotación simultánea, pacientes/día de Guardia, tiempo medio de clasificación, re-triage, integración específica con HCE y eventual automatización/IA.","source":"Hospital Privado Universitario de Córdoba · Guardia Médica + Institucional + Telemedicina + acreditación JCI","confirmed":true,"ai":false,"referenceType":"Caso productivo / referencia JCI"},
-    {"name":"Sanatorio Finochietto","model":"Triage presencial estructurado","responsible":"Enfermería","scale":"Método de triage institucional · escala/niveles a confirmar","technology":"HCE institucional integrada al circuito de Emergencias · sin evidencia pública de IA clasificatoria","status":"Productivo · validado","statusClass":"ok","key":"Enfermería realiza evaluación inicial con preguntas y signos vitales para clasificar prioridad. Guardia 24/7/365 con 7 consultorios, 9 camas individuales de observación y 2 posiciones de Shock Room. Referencia histórica 2017: 36.755 consultas de Emergencias (~101/día) y 2.994 internaciones; usar como antecedente, no como volumen actual.","next":"Confirmar escala/niveles, dotación simultánea y puestos de triage, pacientes/día actuales, tiempo medio, SLA por nivel, distribución de categorías, re-triage e integración funcional del triage con HCE/IA.","source":"Sanatorio Finochietto · Emergencias + evidencia institucional de Enfermería + publicación científica con datos históricos de Guardia","confirmed":true,"ai":false,"referenceType":"Caso productivo / referencia digital"}
+    {
+      "name": "Hospital Alemán",
+      "model": "Triage presencial estructurado + circuitos diferenciados de baja complejidad",
+      "responsible": "Enfermería. Dotación relevada: Adultos 1 enf. 24 h · Pediatría 1 enf. 24 h · Ginecología 1 enf. Lun–Vie (horario a confirmar). Base simultánea: 2; máxima: 3.",
+      "scale": "Manchester adaptado · 5 niveles con tiempos objetivo",
+      "technology": "Registro clínico institucional + Guardia por Videoconsulta / canales digitales de baja complejidad · sin evidencia pública de IA clasificatoria",
+      "status": "Productivo · validado",
+      "statusClass": "ok",
+      "key": "Triage formal y productivo como primer paso de Guardia. 5 niveles: Rojo inmediato; Naranja 5–15 min; Violeta 60 min; Amarillo 120 min; Verde 180 min. Centro de Emergencias 24/7/365, Unidad de Observación con 17 boxes y circuito ABCD para baja complejidad. La institución reportó históricamente >50.000 atenciones/año. Existe Guardia por Videoconsulta para baja complejidad y posibilidad de reevaluar la prioridad si cambia el cuadro durante la espera.",
+      "next": "Confirmar pacientes/día actuales, tiempo medio real de triage, distribución por nivel, horario/dotación Ginecología, tasa y reglas formales de re-triage, sistema/HCE utilizado, integración y eventual automatización/IA.",
+      "source": "Relevamiento directo + Hospital Alemán · Centro de Emergencias + material institucional de Triage + Guardia por Videoconsulta",
+      "confirmed": true,
+      "ai": false,
+      "referenceType": "Caso productivo / referencia operativa"
+    },
+    {
+      "name": "Hospital Austral",
+      "model": "Triage presencial estructurado + triage virtual",
+      "responsible": "Enfermería en presencial · profesional en triage virtual",
+      "scale": "5 niveles institucionales",
+      "technology": "VITA HCE + triage digital + Portal del Paciente + Guardia Virtual integrada",
+      "status": "Productivo · validado",
+      "statusClass": "ok",
+      "key": "~650 pacientes/día en Emergencias; ~20% requiere mayor complejidad/observación. Todo paciente adulto o pediátrico pasa por triage. Niveles 1–3 se resuelven por Emergencias 24/7; niveles 4–5 pueden derivarse a Demanda Espontánea. El triage virtual puede asignar horario programado para atención presencial de baja complejidad. Picos reportados alrededor de 11:00 y 19:00; lunes y martes ~30% más demanda.",
+      "next": "Confirmar dotación simultánea de Enfermería en triage, tiempo promedio de clasificación, SLA por nivel, reglas de re-triage, tasa de concordancia y si VITA incorpora automatización o IA en la recomendación.",
+      "source": "Hospital Austral · Emergencias + Sistema de Triage + Guardia Programada + VITA + información institucional JCI",
+      "confirmed": true,
+      "ai": false,
+      "referenceType": "Caso productivo / referencia JCI"
+    },
+    {
+      "name": "Hospital Italiano",
+      "model": "Triage presencial estructurado + soporte digital integrado a HCE",
+      "responsible": "Enfermería",
+      "scale": "Protocolo institucional · escala/niveles a confirmar",
+      "technology": "HCE propia + CDA de Guardia + TANA/TanaGPT (IA integrada a HCE)",
+      "status": "Productivo · validado",
+      "statusClass": "ok",
+      "key": "Triage activo en Central de Emergencias. La evaluación genera un documento clínico CDA integrado a la HCE con signos vitales, diagnóstico, resultado asistencial y prioridad de atención. Reporte institucional: 42.759 documentos de Guardia. TanaGPT fue pilotado en Emergencias Adultos y existe antecedente de bot clínico para identificar pacientes que requieren atención prioritaria.",
+      "next": "Confirmar escala exacta, dotación simultánea por turno, pacientes/día, tiempo medio de triage, criterios de re-triage y si la IA interviene actualmente en la asignación de prioridad clínica.",
+      "source": "Hospital Italiano · Reporte de Gestión 2024–2025 + material institucional TANA/TanaGPT + formación institucional de Triage",
+      "confirmed": true,
+      "ai": true,
+      "referenceType": "Caso productivo / referencia digital"
+    },
+    {
+      "name": "Galeno · TTS (Trinidad Triage System)",
+      "model": "Triage digital estructurado",
+      "responsible": "Enfermería / personal clínico capacitado",
+      "scale": "TTS propio",
+      "technology": "Sistema digital propio Galeno",
+      "status": "Productivo",
+      "statusClass": "ok",
+      "key": "Desarrollado para los 6 sanatorios de Galeno; implementación inicial en guardias de Clínica Médica y Pediatría. Primera puesta en producción: 23/02/2023.",
+      "next": "Completar dotación por turno, tiempo de triage, arquitectura/integración y métricas de resultados",
+      "source": "Estudio / material relevado sobre TTS",
+      "confirmed": true,
+      "ai": false,
+      "referenceType": "Caso productivo"
+    },
+    {
+      "name": "SAP-RN · ALTEC + Google",
+      "model": "IA asistiendo organización de guardia",
+      "responsible": "Enfermería define prioridad",
+      "scale": "Protocolos de emergencia Río Negro",
+      "technology": "IA Google + plataforma ALTEC",
+      "status": "Piloto real",
+      "statusClass": "ok",
+      "key": "Viedma; expansión prevista a Cipolletti",
+      "next": "Buscar resultados de piloto y contacto",
+      "source": "ALTEC / información pública",
+      "confirmed": true,
+      "ai": true,
+      "referenceType": "Caso IA"
+    },
+    {
+      "name": "Hospital Privado Universitario de Córdoba",
+      "model": "Triage presencial estructurado + circuito diferenciado de baja complejidad",
+      "responsible": "A confirmar",
+      "scale": "Triage institucional · escala/niveles a confirmar",
+      "technology": "HCE institucional + autogestión digital + Telemedicina + telepresencia en Guardia",
+      "status": "Productivo · validado",
+      "statusClass": "ok",
+      "key": "Guardia 24/7 en sedes Central y Núñez. En sede central el triage valora gravedad y riesgo vital y define prioridad. Atención Ambulatoria absorbe cuadros agudos sin emergencia. Institución acreditada JCI desde 2024; referencia institucional: 240 camas, 48 camas UTI y ~1,8 M de consultas médicas/año (volumen institucional, no exclusivo de Guardia).",
+      "next": "Confirmar responsable del triage, escala y niveles exactos, dotación simultánea, pacientes/día de Guardia, tiempo medio de clasificación, re-triage, integración específica con HCE y eventual automatización/IA.",
+      "source": "Hospital Privado Universitario de Córdoba · Guardia Médica + Institucional + Telemedicina + acreditación JCI",
+      "confirmed": true,
+      "ai": false,
+      "referenceType": "Caso productivo / referencia JCI"
+    },
+    {
+      "name": "Sanatorio Finochietto",
+      "model": "Triage presencial estructurado",
+      "responsible": "Enfermería",
+      "scale": "Método de triage institucional · escala/niveles a confirmar",
+      "technology": "HCE institucional integrada al circuito de Emergencias · sin evidencia pública de IA clasificatoria",
+      "status": "Productivo · validado",
+      "statusClass": "ok",
+      "key": "Enfermería realiza evaluación inicial con preguntas y signos vitales para clasificar prioridad. Guardia 24/7/365 con 7 consultorios, 9 camas individuales de observación y 2 posiciones de Shock Room. Referencia histórica 2017: 36.755 consultas de Emergencias (~101/día) y 2.994 internaciones; usar como antecedente, no como volumen actual.",
+      "next": "Confirmar escala/niveles, dotación simultánea y puestos de triage, pacientes/día actuales, tiempo medio, SLA por nivel, distribución de categorías, re-triage e integración funcional del triage con HCE/IA.",
+      "source": "Sanatorio Finochietto · Emergencias + evidencia institucional de Enfermería + publicación científica con datos históricos de Guardia",
+      "confirmed": true,
+      "ai": false,
+      "referenceType": "Caso productivo / referencia digital"
+    }
   ],
   "latam": [
-    {"name":"Clínica Imbanaco · Quirónsalud","country":"Colombia","model":"Triage digital estructurado","provider":"Treelogic / SET","scale":"SET","aiRole":"Software estructurado de clasificación y priorización","humanRole":"Profesional de triage","evidence":"Implementación confirmada en Urgencias · 2026","priority":"Alta","priorityClass":"ok","productive":true},
-    {"name":"Subred Integrada Sur · Doc-Tok","country":"Colombia","model":"IA para recomendación de triage","provider":"Doc-Tok","scale":"5 categorías Colombia","aiRole":"Clasifica según síntomas + alertas de criticidad","humanRole":"Validación profesional","evidence":"Piloto / preincubación","priority":"Alta","priorityClass":"ok","productive":false},
-    {"name":"Subred Sur Occidente · Oportuna","country":"Colombia","model":"IA para monitoreo post-triage","provider":"Oportuna","scale":"Oportunidad por categoría","aiRole":"Alertas de espera y oportunidad","humanRole":"Equipo clínico","evidence":">640.000 alertas; Triage 2: 29→18 min (institución)","priority":"Media-Alta","priorityClass":"part","productive":true},
-    {"name":"Hospital Santa Rita","country":"Brasil","model":"IA asistiendo triage","provider":"Dr. Mobile","scale":"Manchester","aiRole":"Captura/estructura + apoyo decisión","humanRole":"Enfermería","evidence":"Claim >50% reducción tiempo","priority":"Alta","priorityClass":"ok","productive":true},
-    {"name":"UPA Campos Salles","country":"Brasil","model":"IA analítica + clasificación de riesgo","provider":"CloudSaúde / Sinamnese","scale":"Manchester / flujo propio","aiRole":"Recomienda y alerta","humanRole":"Enfermería decide","evidence":"8.000+ pacientes/mes (proveedor)","priority":"Alta","priorityClass":"ok","productive":true},
-    {"name":"Santa Casa Porto Alegre","country":"Brasil","model":"Triage IA","provider":"A validar","scale":"A validar","aiRole":"Apoyo clasificación","humanRole":"Enfermería","evidence":"Caso COVID","priority":"Media","priorityClass":"part","productive":true},
-    {"name":"Hospital Regional de Talca","country":"Chile","model":"Investigación retrospectiva","provider":"Académico","scale":"A validar","aiRole":"Modelos de clasificación","humanRole":"—","evidence":"Académica","priority":"Anexo","priorityClass":"na","productive":false}
+    {
+      "name": "Clínica Imbanaco · Quirónsalud",
+      "country": "Colombia",
+      "model": "Triage digital estructurado",
+      "provider": "Treelogic / SET",
+      "scale": "SET",
+      "aiRole": "Software estructurado de clasificación y priorización",
+      "humanRole": "Profesional de triage",
+      "evidence": "Implementación confirmada en Urgencias · 2026",
+      "priority": "Alta",
+      "priorityClass": "ok",
+      "productive": true
+    },
+    {
+      "name": "Subred Integrada Sur · Doc-Tok",
+      "country": "Colombia",
+      "model": "IA para recomendación de triage",
+      "provider": "Doc-Tok",
+      "scale": "5 categorías Colombia",
+      "aiRole": "Clasifica según síntomas + alertas de criticidad",
+      "humanRole": "Validación profesional",
+      "evidence": "Piloto / preincubación",
+      "priority": "Alta",
+      "priorityClass": "ok",
+      "productive": false
+    },
+    {
+      "name": "Subred Sur Occidente · Oportuna",
+      "country": "Colombia",
+      "model": "IA para monitoreo post-triage",
+      "provider": "Oportuna",
+      "scale": "Oportunidad por categoría",
+      "aiRole": "Alertas de espera y oportunidad",
+      "humanRole": "Equipo clínico",
+      "evidence": ">640.000 alertas; Triage 2: 29→18 min (institución)",
+      "priority": "Media-Alta",
+      "priorityClass": "part",
+      "productive": true
+    },
+    {
+      "name": "Hospital Santa Rita",
+      "country": "Brasil",
+      "model": "IA asistiendo triage",
+      "provider": "Dr. Mobile",
+      "scale": "Manchester",
+      "aiRole": "Captura/estructura + apoyo decisión",
+      "humanRole": "Enfermería",
+      "evidence": "Claim >50% reducción tiempo",
+      "priority": "Alta",
+      "priorityClass": "ok",
+      "productive": true
+    },
+    {
+      "name": "UPA Campos Salles",
+      "country": "Brasil",
+      "model": "IA analítica + clasificación de riesgo",
+      "provider": "CloudSaúde / Sinamnese",
+      "scale": "Manchester / flujo propio",
+      "aiRole": "Recomienda y alerta",
+      "humanRole": "Enfermería decide",
+      "evidence": "8.000+ pacientes/mes (proveedor)",
+      "priority": "Alta",
+      "priorityClass": "ok",
+      "productive": true
+    },
+    {
+      "name": "Santa Casa Porto Alegre",
+      "country": "Brasil",
+      "model": "Triage IA",
+      "provider": "A validar",
+      "scale": "A validar",
+      "aiRole": "Apoyo clasificación",
+      "humanRole": "Enfermería",
+      "evidence": "Caso COVID",
+      "priority": "Media",
+      "priorityClass": "part",
+      "productive": true
+    },
+    {
+      "name": "Hospital Regional de Talca",
+      "country": "Chile",
+      "model": "Investigación retrospectiva",
+      "provider": "Académico",
+      "scale": "A validar",
+      "aiRole": "Modelos de clasificación",
+      "humanRole": "—",
+      "evidence": "Académica",
+      "priority": "Anexo",
+      "priorityClass": "na",
+      "productive": false
+    }
   ],
   "suppliers": [
-    {"id":"certuma","name":"Certuma","country":"AR","url":"https://www.certuma.ai/"},
-    {"id":"oops","name":"TrIAge / Oops","country":"AR","url":"https://triage.oops.ar/"},
-    {"id":"cloud","name":"CloudSaúde / Sinamnese","country":"BR","url":"https://www.cloudsaude.com.br/sinamnese"},
-    {"id":"guardia","name":"Guardia Virtual","country":"AR","url":"https://www.guardiavirtualmedica.com/es/servicios/"},
-    {"id":"uma","name":"ÜMA","country":"AR / LATAM","url":"https://umatech.ai/"}
+    {
+      "id": "certuma",
+      "name": "Certuma",
+      "country": "AR",
+      "url": "https://www.certuma.ai/"
+    },
+    {
+      "id": "oops",
+      "name": "TrIAge / Oops",
+      "country": "AR",
+      "url": "https://triage.oops.ar/"
+    },
+    {
+      "id": "cloud",
+      "name": "CloudSaúde / Sinamnese",
+      "country": "BR",
+      "url": "https://www.cloudsaude.com.br/sinamnese"
+    },
+    {
+      "id": "guardia",
+      "name": "Guardia Virtual",
+      "country": "AR",
+      "url": "https://www.guardiavirtualmedica.com/es/servicios/"
+    },
+    {
+      "id": "uma",
+      "name": "ÜMA",
+      "country": "AR / LATAM",
+      "url": "https://umatech.ai/"
+    }
   ],
   "supplierCriteria": [
-    {"criterion":"Triage específico","certuma":"✓","oops":"✓","cloud":"✓","guardia":"✓","uma":"✓ / Pre-Doc"},
-    {"criterion":"Captura autónoma paciente","certuma":"✓*","oops":"Voz/chat/formulario*","cloud":"Parcial / validar","guardia":"✓","uma":"✓"},
-    {"criterion":"Tótem","certuma":"✓*","oops":"A validar","cloud":"Estación de triage","guardia":"✓","uma":"Recepción digital"},
-    {"criterion":"Conversacional","certuma":"✓*","oops":"✓ voz/chat","cloud":"No eje principal","guardia":"✓ NLP","uma":"✓ Patient AI"},
-    {"criterion":"Signos vitales","certuma":"✓*","oops":"✓","cloud":"✓","guardia":"✓ telemetría","uma":"A validar"},
-    {"criterion":"Escala clínica","certuma":"A validar","oops":"ESI v4","cloud":"Manchester / propia","guardia":"5 niveles; validar escala","uma":"A validar"},
-    {"criterion":"Recomienda prioridad","certuma":"✓*","oops":"✓","cloud":"✓","guardia":"✓","uma":"✓ / derivación"},
-    {"criterion":"Clasifica automáticamente","certuma":"A validar alcance","oops":"Sugiere ESI","cloud":"Motor recomienda","guardia":"✓*","uma":"A validar"},
-    {"criterion":"Validación Enfermería","certuma":"✓*","oops":"✓ obligatoria","cloud":"✓ decisión final","guardia":"A validar","uma":"A validar"},
-    {"criterion":"Red flags","certuma":"A validar","oops":"✓","cloud":"✓ alertas/riesgos","guardia":"A validar","uma":"✓*"},
-    {"criterion":"Re-triage","certuma":"A validar","oops":"A validar","cloud":"✓ seguimiento","guardia":"A validar","uma":"A validar"},
-    {"criterion":"Trazabilidad decisión","certuma":"A validar","oops":"✓ alta","cloud":"✓","guardia":"A validar","uma":"✓"},
-    {"criterion":"Explicabilidad","certuma":"A validar","oops":"✓ white-box","cloud":"Parcial / protocolo","guardia":"A validar","uma":"Declara IA explicable*"},
-    {"criterion":"HL7/FHIR/API","certuma":"A validar","oops":"API; HL7/FHIR validar","cloud":"✓ FHIR/HL7","guardia":"A validar","uma":"✓ HL7/FHIR"},
-    {"criterion":"Integración ThinkSoft","certuma":"A validar","oops":"A validar","cloud":"A validar","guardia":"A validar","uma":"A validar"},
-    {"criterion":"Implementación hospitalaria comprobable","certuma":"Referencias a solicitar","oops":"A validar","cloud":"✓ UPA Campos Salles","guardia":"A validar","uma":"Referencias de red a validar"},
-    {"criterion":"Nivel de evidencia","certuma":"Media · producto documentado; falta caso hospitalario","oops":"Media · documentación técnica; falta caso productivo","cloud":"Alta · caso productivo reportado + métricas","guardia":"Media-baja · capacidades/claims; validar operación","uma":"Media · casos propios; validar triage presencial"},
-    {"criterion":"Referencias hospitalarias","certuma":"Pedir referencias","oops":"A validar","cloud":"UPA Campos Salles","guardia":"A validar","uma":"Referencias salud"},
-    {"criterion":"Casos LATAM","certuma":"A validar","oops":"Argentina*","cloud":"Brasil","guardia":"A validar","uma":"Perú / México / otros"},
-    {"criterion":"Evidencia publicada","certuma":"A relevar","oops":"Técnica propia","cloud":"Caso productivo propio","guardia":"Claims comerciales","uma":"Casos propios"},
-    {"criterion":"Tiempo implementación","certuma":"A cotizar","oops":"A cotizar","cloud":"A cotizar","guardia":"A cotizar","uma":"A cotizar"},
-    {"criterion":"Soporte Argentina","certuma":"✓","oops":"✓","cloud":"No identificado","guardia":"✓","uma":"✓"},
-    {"criterion":"Costo implementación","certuma":"A cotizar","oops":"A cotizar","cloud":"A cotizar","guardia":"A cotizar","uma":"A cotizar"}
+    {
+      "criterion": "Triage específico",
+      "certuma": "✓",
+      "oops": "✓",
+      "cloud": "✓",
+      "guardia": "✓",
+      "uma": "✓ / Pre-Doc"
+    },
+    {
+      "criterion": "Captura autónoma paciente",
+      "certuma": "✓*",
+      "oops": "Voz/chat/formulario*",
+      "cloud": "Parcial / validar",
+      "guardia": "✓",
+      "uma": "✓"
+    },
+    {
+      "criterion": "Tótem",
+      "certuma": "✓*",
+      "oops": "A validar",
+      "cloud": "Estación de triage",
+      "guardia": "✓",
+      "uma": "Recepción digital"
+    },
+    {
+      "criterion": "Conversacional",
+      "certuma": "✓*",
+      "oops": "✓ voz/chat",
+      "cloud": "No eje principal",
+      "guardia": "✓ NLP",
+      "uma": "✓ Patient AI"
+    },
+    {
+      "criterion": "Signos vitales",
+      "certuma": "✓*",
+      "oops": "✓",
+      "cloud": "✓",
+      "guardia": "✓ telemetría",
+      "uma": "A validar"
+    },
+    {
+      "criterion": "Escala clínica",
+      "certuma": "A validar",
+      "oops": "ESI v4",
+      "cloud": "Manchester / propia",
+      "guardia": "5 niveles; validar escala",
+      "uma": "A validar"
+    },
+    {
+      "criterion": "Recomienda prioridad",
+      "certuma": "✓*",
+      "oops": "✓",
+      "cloud": "✓",
+      "guardia": "✓",
+      "uma": "✓ / derivación"
+    },
+    {
+      "criterion": "Clasifica automáticamente",
+      "certuma": "A validar alcance",
+      "oops": "Sugiere ESI",
+      "cloud": "Motor recomienda",
+      "guardia": "✓*",
+      "uma": "A validar"
+    },
+    {
+      "criterion": "Validación Enfermería",
+      "certuma": "✓*",
+      "oops": "✓ obligatoria",
+      "cloud": "✓ decisión final",
+      "guardia": "A validar",
+      "uma": "A validar"
+    },
+    {
+      "criterion": "Red flags",
+      "certuma": "A validar",
+      "oops": "✓",
+      "cloud": "✓ alertas/riesgos",
+      "guardia": "A validar",
+      "uma": "✓*"
+    },
+    {
+      "criterion": "Re-triage",
+      "certuma": "A validar",
+      "oops": "A validar",
+      "cloud": "✓ seguimiento",
+      "guardia": "A validar",
+      "uma": "A validar"
+    },
+    {
+      "criterion": "Trazabilidad decisión",
+      "certuma": "A validar",
+      "oops": "✓ alta",
+      "cloud": "✓",
+      "guardia": "A validar",
+      "uma": "✓"
+    },
+    {
+      "criterion": "Explicabilidad",
+      "certuma": "A validar",
+      "oops": "✓ white-box",
+      "cloud": "Parcial / protocolo",
+      "guardia": "A validar",
+      "uma": "Declara IA explicable*"
+    },
+    {
+      "criterion": "HL7/FHIR/API",
+      "certuma": "A validar",
+      "oops": "API; HL7/FHIR validar",
+      "cloud": "✓ FHIR/HL7",
+      "guardia": "A validar",
+      "uma": "✓ HL7/FHIR"
+    },
+    {
+      "criterion": "Integración ThinkSoft",
+      "certuma": "A validar",
+      "oops": "A validar",
+      "cloud": "A validar",
+      "guardia": "A validar",
+      "uma": "A validar"
+    },
+    {
+      "criterion": "Implementación hospitalaria comprobable",
+      "certuma": "Referencias a solicitar",
+      "oops": "A validar",
+      "cloud": "✓ UPA Campos Salles",
+      "guardia": "A validar",
+      "uma": "Referencias de red a validar"
+    },
+    {
+      "criterion": "Nivel de evidencia",
+      "certuma": "Media · producto documentado; falta caso hospitalario",
+      "oops": "Media · documentación técnica; falta caso productivo",
+      "cloud": "Alta · caso productivo reportado + métricas",
+      "guardia": "Media-baja · capacidades/claims; validar operación",
+      "uma": "Media · casos propios; validar triage presencial"
+    },
+    {
+      "criterion": "Referencias hospitalarias",
+      "certuma": "Pedir referencias",
+      "oops": "A validar",
+      "cloud": "UPA Campos Salles",
+      "guardia": "A validar",
+      "uma": "Referencias salud"
+    },
+    {
+      "criterion": "Casos LATAM",
+      "certuma": "A validar",
+      "oops": "Argentina*",
+      "cloud": "Brasil",
+      "guardia": "A validar",
+      "uma": "Perú / México / otros"
+    },
+    {
+      "criterion": "Evidencia publicada",
+      "certuma": "A relevar",
+      "oops": "Técnica propia",
+      "cloud": "Caso productivo propio",
+      "guardia": "Claims comerciales",
+      "uma": "Casos propios"
+    },
+    {
+      "criterion": "Tiempo implementación",
+      "certuma": "A cotizar",
+      "oops": "A cotizar",
+      "cloud": "A cotizar",
+      "guardia": "A cotizar",
+      "uma": "A cotizar"
+    },
+    {
+      "criterion": "Soporte Argentina",
+      "certuma": "✓",
+      "oops": "✓",
+      "cloud": "No identificado",
+      "guardia": "✓",
+      "uma": "✓"
+    },
+    {
+      "criterion": "Costo implementación",
+      "certuma": "A cotizar",
+      "oops": "A cotizar",
+      "cloud": "A cotizar",
+      "guardia": "A cotizar",
+      "uma": "A cotizar"
+    }
   ],
   "gaps": [
-    {"id":"G1","gap":"Volumen y distribución horaria Guardia Otamendi","impact":"Crítico","impactClass":"no","action":"Extraer arribos por hora/día y especialidad","owner":"Otamendi / Sistemas","due":"15/09","status":"Abierto"},
-    {"id":"G2","gap":"Circuito actual Guardia","impact":"Crítico","impactClass":"no","action":"Mapear puerta→médico, esperas y derivaciones","owner":"Procesos / Guardia","due":"15/09","status":"Abierto"},
-    {"id":"G3","gap":"Dotación objetivo triage","impact":"Crítico","impactClass":"no","action":"Dimensionar escenarios 1/2/3 enfermeros y modelo con IA","owner":"Procesos / Enfermería","due":"16/09","status":"Abierto"},
-    {"id":"G4","gap":"Referencias Certuma","impact":"Crítico","impactClass":"no","action":"Obtener 2 referencias hospitalarias y resultados","owner":"Proveedor","due":"15/09","status":"Abierto"},
-    {"id":"G5","gap":"Integración Certuma","impact":"Crítico","impactClass":"no","action":"Confirmar API/FHIR/HL7 + flujo ThinkSoft","owner":"IT / Proveedor","due":"16/09","status":"Abierto"},
-    {"id":"G6","gap":"Escala clínica objetivo","impact":"Alto","impactClass":"part","action":"Definir ESI vs Manchester vs propia","owner":"Dirección Médica / Enfermería","due":"16/09","status":"Abierto"},
-    {"id":"G7","gap":"Red flags y re-triage","impact":"Alto","impactClass":"part","action":"Definir reglas clínicas y escalamiento","owner":"Guardia / Enfermería","due":"16/09","status":"Abierto"},
-    {"id":"G8","gap":"Evidencia comparativa proveedores","impact":"Alto","impactClass":"part","action":"Completar demos, referencias y evidencia publicada","owner":"Procesos","due":"17/09","status":"En curso"}
+    {
+      "id": "G1",
+      "gap": "Volumen y distribución horaria Guardia Otamendi",
+      "impact": "Crítico",
+      "impactClass": "no",
+      "action": "Extraer arribos por hora/día y especialidad",
+      "owner": "Otamendi / Sistemas",
+      "due": "15/09",
+      "status": "Abierto"
+    },
+    {
+      "id": "G2",
+      "gap": "Circuito actual Guardia",
+      "impact": "Crítico",
+      "impactClass": "no",
+      "action": "Mapear puerta→médico, esperas y derivaciones",
+      "owner": "Procesos / Guardia",
+      "due": "15/09",
+      "status": "Abierto"
+    },
+    {
+      "id": "G3",
+      "gap": "Dotación objetivo triage",
+      "impact": "Crítico",
+      "impactClass": "no",
+      "action": "Dimensionar escenarios 1/2/3 enfermeros y modelo con IA",
+      "owner": "Procesos / Enfermería",
+      "due": "16/09",
+      "status": "Abierto"
+    },
+    {
+      "id": "G4",
+      "gap": "Referencias Certuma",
+      "impact": "Crítico",
+      "impactClass": "no",
+      "action": "Obtener 2 referencias hospitalarias y resultados",
+      "owner": "Proveedor",
+      "due": "15/09",
+      "status": "Abierto"
+    },
+    {
+      "id": "G5",
+      "gap": "Integración Certuma",
+      "impact": "Crítico",
+      "impactClass": "no",
+      "action": "Confirmar API/FHIR/HL7 + flujo ThinkSoft",
+      "owner": "IT / Proveedor",
+      "due": "16/09",
+      "status": "Abierto"
+    },
+    {
+      "id": "G6",
+      "gap": "Escala clínica objetivo",
+      "impact": "Alto",
+      "impactClass": "part",
+      "action": "Definir ESI vs Manchester vs propia",
+      "owner": "Dirección Médica / Enfermería",
+      "due": "16/09",
+      "status": "Abierto"
+    },
+    {
+      "id": "G7",
+      "gap": "Red flags y re-triage",
+      "impact": "Alto",
+      "impactClass": "part",
+      "action": "Definir reglas clínicas y escalamiento",
+      "owner": "Guardia / Enfermería",
+      "due": "16/09",
+      "status": "Abierto"
+    },
+    {
+      "id": "G8",
+      "gap": "Evidencia comparativa proveedores",
+      "impact": "Alto",
+      "impactClass": "part",
+      "action": "Completar demos, referencias y evidencia publicada",
+      "owner": "Procesos",
+      "due": "17/09",
+      "status": "En curso"
+    }
   ],
   "timeline": [
-    {"date":"11/09","title":"Consolidar","text":"Benchmark web, matriz y preguntas faltantes."},{"date":"14/09","title":"Contactar","text":"Hospitales y proveedores prioritarios."},{"date":"15/09","title":"Relevar","text":"Datos internos Otamendi y demos."},{"date":"16/09","title":"Comparar","text":"Score proveedores + escenarios."},{"date":"17/09","title":"Recomendar","text":"Business case + piloto + cierre."},{"date":"18/09","title":"Definir","text":"Recomendación final + alcance del piloto."}
+    {
+      "date": "11/09",
+      "title": "Consolidar",
+      "text": "Benchmark web, matriz y preguntas faltantes."
+    },
+    {
+      "date": "14/09",
+      "title": "Contactar",
+      "text": "Hospitales y proveedores prioritarios."
+    },
+    {
+      "date": "15/09",
+      "title": "Relevar",
+      "text": "Datos internos Otamendi y demos."
+    },
+    {
+      "date": "16/09",
+      "title": "Comparar",
+      "text": "Score proveedores + escenarios."
+    },
+    {
+      "date": "17/09",
+      "title": "Recomendar",
+      "text": "Business case + piloto + cierre."
+    },
+    {
+      "date": "18/09",
+      "title": "Definir",
+      "text": "Recomendación final + alcance del piloto."
+    }
   ]
 }
