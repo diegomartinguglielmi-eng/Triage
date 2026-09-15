@@ -436,84 +436,76 @@
   ],
   "gaps": [
     {
-      "id": "G1",
-      "gap": "Volumen y distribución horaria Guardia Otamendi",
+      "id": "V1",
+      "gap": "Base de demanda consolidada",
+      "action": "Incorporar mayo–agosto y recalcular distribución horaria y semanal",
+      "owner": "Sistemas / Procesos",
+      "status": "En curso",
       "impact": "Crítico",
-      "impactClass": "no",
-      "action": "Extraer arribos por hora/día y especialidad",
-      "owner": "Otamendi / Sistemas",
-      "due": "15/09",
-      "status": "Abierto"
+      "impactClass": "no"
     },
     {
-      "id": "G2",
-      "gap": "Circuito actual Guardia",
-      "impact": "Crítico",
-      "impactClass": "no",
-      "action": "Mapear puerta→médico, esperas y derivaciones",
-      "owner": "Procesos / Guardia",
-      "due": "15/09",
-      "status": "Abierto"
-    },
-    {
-      "id": "G3",
-      "gap": "Dotación objetivo triage",
-      "impact": "Crítico",
-      "impactClass": "no",
-      "action": "Dimensionar escenarios 1/2/3 enfermeros y modelo con IA",
+      "id": "V2",
+      "gap": "Capacidad de la dotación actual",
+      "action": "Validar que la dotación vigente absorba el escenario de 20–30% de excepciones",
       "owner": "Procesos / Enfermería",
-      "due": "16/09",
-      "status": "Abierto"
-    },
-    {
-      "id": "G4",
-      "gap": "Referencias Certuma",
+      "status": "En análisis",
       "impact": "Crítico",
-      "impactClass": "no",
-      "action": "Obtener 2 referencias hospitalarias y resultados",
-      "owner": "Proveedor",
-      "due": "15/09",
-      "status": "Abierto"
+      "impactClass": "no"
     },
     {
-      "id": "G5",
-      "gap": "Integración Certuma",
-      "impact": "Crítico",
-      "impactClass": "no",
-      "action": "Confirmar API/FHIR/HL7 + flujo ThinkSoft",
-      "owner": "IT / Proveedor",
-      "due": "16/09",
-      "status": "Abierto"
-    },
-    {
-      "id": "G6",
+      "id": "V3",
       "gap": "Escala clínica objetivo",
-      "impact": "Alto",
-      "impactClass": "part",
-      "action": "Definir ESI vs Manchester vs propia",
+      "action": "Definir ESI, Manchester o escala institucional y sus reglas de asignación",
       "owner": "Dirección Médica / Enfermería",
-      "due": "16/09",
-      "status": "Abierto"
+      "status": "Pendiente",
+      "impact": "Crítico",
+      "impactClass": "no"
     },
     {
-      "id": "G7",
-      "gap": "Red flags y re-triage",
-      "impact": "Alto",
-      "impactClass": "part",
-      "action": "Definir reglas clínicas y escalamiento",
+      "id": "V4",
+      "gap": "Red flags, excepciones y re-triage",
+      "action": "Definir criterios de escalamiento, corrección y reevaluación clínica",
       "owner": "Guardia / Enfermería",
-      "due": "16/09",
-      "status": "Abierto"
+      "status": "Pendiente",
+      "impact": "Crítico",
+      "impactClass": "no"
     },
     {
-      "id": "G8",
-      "gap": "Evidencia comparativa proveedores",
+      "id": "V5",
+      "gap": "Integración con ThinkSoft",
+      "action": "Confirmar arquitectura, interfaces, trazabilidad y registro/cierre asistencial",
+      "owner": "IT / Procesos / Proveedor",
+      "status": "Pendiente",
+      "impact": "Crítico",
+      "impactClass": "no"
+    },
+    {
+      "id": "V6",
+      "gap": "Proveedores para la PoC",
+      "action": "Seleccionar finalistas y solicitar demo, referencias, alcance y cotización",
+      "owner": "Procesos / Dirección Médica / IT",
+      "status": "En curso",
       "impact": "Alto",
-      "impactClass": "part",
-      "action": "Completar demos, referencias y evidencia publicada",
-      "owner": "Procesos",
-      "due": "17/09",
-      "status": "En curso"
+      "impactClass": "part"
+    },
+    {
+      "id": "V7",
+      "gap": "Criterios de aprobación del piloto",
+      "action": "Definir sensibilidad, under-triage, concordancia, tiempos y porcentaje de excepciones",
+      "owner": "Procesos / Calidad / Enfermería",
+      "status": "Pendiente",
+      "impact": "Crítico",
+      "impactClass": "no"
+    },
+    {
+      "id": "V8",
+      "gap": "Seguridad, privacidad y gobernanza",
+      "action": "Validar tratamiento de datos, consentimiento, retención y uso para entrenamiento",
+      "owner": "IT / Legales / Seguridad de la Información",
+      "status": "Pendiente",
+      "impact": "Crítico",
+      "impactClass": "no"
     }
   ],
   "timeline": [
