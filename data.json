@@ -230,10 +230,10 @@
       "url": "https://triage.oops.ar/"
     },
     {
-      "id": "cloud",
-      "name": "CloudSaúde / Sinamnese",
-      "country": "BR",
-      "url": "https://www.cloudsaude.com.br/sinamnese"
+      "id": "knidian",
+      "name": "Knidian AI",
+      "country": "US / AR",
+      "url": "https://www.knidian.ai/"
     },
     {
       "id": "guardia",
@@ -253,185 +253,185 @@
       "criterion": "Triage específico",
       "certuma": "✓",
       "oops": "✓",
-      "cloud": "✓",
       "guardia": "✓",
-      "uma": "✓ / Pre-Doc"
+      "uma": "✓ / Pre-Doc",
+      "knidian": "✓ · evaluación RED/WHITE"
     },
     {
       "criterion": "Captura autónoma paciente",
       "certuma": "✓*",
       "oops": "Voz/chat/formulario*",
-      "cloud": "Parcial / validar",
       "guardia": "✓",
-      "uma": "✓"
+      "uma": "✓",
+      "knidian": "No en versión pública · uso profesional"
     },
     {
       "criterion": "Tótem",
       "certuma": "✓*",
       "oops": "A validar",
-      "cloud": "Estación de triage",
       "guardia": "✓",
-      "uma": "Recepción digital"
+      "uma": "Recepción digital",
+      "knidian": "No identificado · a desarrollar"
     },
     {
       "criterion": "Conversacional",
       "certuma": "✓*",
       "oops": "✓ voz/chat",
-      "cloud": "No eje principal",
       "guardia": "✓ NLP",
-      "uma": "✓ Patient AI"
+      "uma": "✓ Patient AI",
+      "knidian": "Texto + audio; diálogo guiado a validar"
     },
     {
       "criterion": "Signos vitales",
       "certuma": "✓*",
       "oops": "✓",
-      "cloud": "✓",
       "guardia": "✓ telemetría",
-      "uma": "A validar"
+      "uma": "A validar",
+      "knidian": "Acepta datos clínicos; sin dispositivo propio"
     },
     {
       "criterion": "Escala clínica",
       "certuma": "A validar",
       "oops": "ESI v4",
-      "cloud": "Manchester / propia",
       "guardia": "5 niveles; validar escala",
-      "uma": "A validar"
+      "uma": "A validar",
+      "knidian": "RED/WHITE · no equivale a ESI/Manchester"
     },
     {
       "criterion": "Recomienda prioridad",
       "certuma": "✓*",
       "oops": "✓",
-      "cloud": "✓",
       "guardia": "✓",
-      "uma": "✓ / derivación"
+      "uma": "✓ / derivación",
+      "knidian": "✓ + justificación y acción sugerida"
     },
     {
       "criterion": "Clasifica automáticamente",
       "certuma": "A validar alcance",
       "oops": "Sugiere ESI",
-      "cloud": "Motor recomienda",
       "guardia": "✓*",
-      "uma": "A validar"
+      "uma": "A validar",
+      "knidian": "✓ binaria · requiere revisión profesional"
     },
     {
       "criterion": "Validación Enfermería",
       "certuma": "✓*",
       "oops": "✓ obligatoria",
-      "cloud": "✓ decisión final",
       "guardia": "A validar",
-      "uma": "A validar"
+      "uma": "A validar",
+      "knidian": "Revisión profesional obligatoria"
     },
     {
       "criterion": "Red flags",
       "certuma": "A validar",
       "oops": "✓",
-      "cloud": "✓ alertas/riesgos",
       "guardia": "A validar",
-      "uma": "✓*"
+      "uma": "✓*",
+      "knidian": "Categoría “cant-miss”; alcance a validar"
     },
     {
       "criterion": "Re-triage",
       "certuma": "A validar",
       "oops": "A validar",
-      "cloud": "✓ seguimiento",
       "guardia": "A validar",
-      "uma": "A validar"
+      "uma": "A validar",
+      "knidian": "No documentado"
     },
     {
       "criterion": "Trazabilidad decisión",
       "certuma": "A validar",
       "oops": "✓ alta",
-      "cloud": "✓",
       "guardia": "A validar",
-      "uma": "✓"
+      "uma": "✓",
+      "knidian": "Salida estructurada + justificación"
     },
     {
       "criterion": "Explicabilidad",
       "certuma": "A validar",
       "oops": "✓ white-box",
-      "cloud": "Parcial / protocolo",
       "guardia": "A validar",
-      "uma": "Declara IA explicable*"
+      "uma": "Declara IA explicable*",
+      "knidian": "“Why” por diagnóstico + justificación de triage"
     },
     {
       "criterion": "HL7/FHIR/API",
       "certuma": "A validar",
       "oops": "API; HL7/FHIR validar",
-      "cloud": "✓ FHIR/HL7",
       "guardia": "A validar",
-      "uma": "✓ HL7/FHIR"
+      "uma": "✓ HL7/FHIR",
+      "knidian": "REST API · FHIR figura en roadmap"
     },
     {
       "criterion": "Integración ThinkSoft",
       "certuma": "A validar",
       "oops": "A validar",
-      "cloud": "A validar",
       "guardia": "A validar",
-      "uma": "A validar"
+      "uma": "A validar",
+      "knidian": "A validar"
     },
     {
       "criterion": "Implementación hospitalaria comprobable",
       "certuma": "Referencias a solicitar",
       "oops": "A validar",
-      "cloud": "✓ UPA Campos Salles",
       "guardia": "A validar",
-      "uma": "Referencias de red a validar"
+      "uma": "Referencias de red a validar",
+      "knidian": "Piloto operativo San Miguel 107 · no hospitalario"
     },
     {
       "criterion": "Nivel de evidencia",
       "certuma": "Media · producto documentado; falta caso hospitalario",
       "oops": "Media · documentación técnica; falta caso productivo",
-      "cloud": "Alta · caso productivo reportado + métricas",
       "guardia": "Media-baja · capacidades/claims; validar operación",
-      "uma": "Media · casos propios; validar triage presencial"
+      "uma": "Media · casos propios; validar triage presencial",
+      "knidian": "Media · piloto local; sin métricas clínicas públicas"
     },
     {
       "criterion": "Referencias hospitalarias",
       "certuma": "Pedir referencias",
       "oops": "A validar",
-      "cloud": "UPA Campos Salles",
       "guardia": "A validar",
-      "uma": "Referencias salud"
+      "uma": "Referencias salud",
+      "knidian": "San Miguel 107 en shadow mode; hospitalarias pendientes"
     },
     {
       "criterion": "Casos LATAM",
       "certuma": "A validar",
       "oops": "Argentina*",
-      "cloud": "Brasil",
       "guardia": "A validar",
-      "uma": "Perú / México / otros"
+      "uma": "Perú / México / otros",
+      "knidian": "Argentina · Emergencias San Miguel 107"
     },
     {
       "criterion": "Evidencia publicada",
       "certuma": "A relevar",
       "oops": "Técnica propia",
-      "cloud": "Caso productivo propio",
       "guardia": "Claims comerciales",
-      "uma": "Casos propios"
+      "uma": "Casos propios",
+      "knidian": "Municipio + documentación propia; sin estudio independiente localizado"
     },
     {
       "criterion": "Tiempo implementación",
       "certuma": "A cotizar",
       "oops": "A cotizar",
-      "cloud": "A cotizar",
       "guardia": "A cotizar",
-      "uma": "A cotizar"
+      "uma": "A cotizar",
+      "knidian": "A cotizar / PoC a dimensionar"
     },
     {
       "criterion": "Soporte Argentina",
       "certuma": "✓",
       "oops": "✓",
-      "cloud": "No identificado",
       "guardia": "✓",
-      "uma": "✓"
+      "uma": "✓",
+      "knidian": "✓ presencia y piloto local"
     },
     {
       "criterion": "Costo implementación",
       "certuma": "A cotizar",
       "oops": "A cotizar",
-      "cloud": "A cotizar",
       "guardia": "A cotizar",
-      "uma": "A cotizar"
+      "uma": "A cotizar",
+      "knidian": "A cotizar"
     }
   ],
   "gaps": [
